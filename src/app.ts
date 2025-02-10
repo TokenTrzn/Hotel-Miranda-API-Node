@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
-
+import { loginRouter } from './controllers/LoginController'
+import { authenticate } from './middleware/auth'
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -28,11 +29,11 @@ const swaggerOptions = {
 
 app.use(express.json())
 app.use('/login', loginRouter)
-app.use('/api/v1/servers', serverRoute)
+app.use('/api/v1/bookings', authenticate, bookingsRoute)
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/live', (req: Request, res: Response) => {
     res.send(`${new Date().toISOString()}`)
 })
 

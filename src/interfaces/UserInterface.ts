@@ -7,4 +7,5 @@ export interface UserInterface {
     description: string;
     contact: string;
     status: 'ACTIVE' | 'INACTIVE' | string;
+    password: string;
 }

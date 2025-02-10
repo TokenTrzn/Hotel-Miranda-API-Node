@@ -7,7 +7,8 @@
         "startDate": "08/15/2025",
         "description": "Programmer I",
         "contact": "774-902-0976",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 2,
@@ -17,7 +18,8 @@
         "startDate": "08/06/2025",
         "description": "Software Test Engineer II",
         "contact": "971-927-8210",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 3,
@@ -27,7 +29,8 @@
         "startDate": "10/12/2025",
         "description": "Food Chemist",
         "contact": "340-916-4680",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 4,
@@ -37,7 +40,8 @@
         "startDate": "04/22/2025",
         "description": "Marketing Assistant",
         "contact": "107-696-4099",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 5,
@@ -47,7 +51,8 @@
         "startDate": "06/28/2025",
         "description": "Legal Assistant",
         "contact": "739-513-9154",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 6,
@@ -57,7 +62,8 @@
         "startDate": "01/24/2025",
         "description": "Information Systems Manager",
         "contact": "227-511-7745",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 7,
@@ -67,7 +73,8 @@
         "startDate": "06/06/2025",
         "description": "Staff Accountant I",
         "contact": "964-796-1573",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 8,
@@ -77,7 +84,8 @@
         "startDate": "11/04/2025",
         "description": "Software Test Engineer II",
         "contact": "901-132-8174",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 9,
@@ -87,7 +95,8 @@
         "startDate": "05/19/2025",
         "description": "Safety Technician III",
         "contact": "368-353-3472",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 10,
@@ -97,7 +106,8 @@
         "startDate": "06/14/2025",
         "description": "Health Coach II",
         "contact": "554-565-2417",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 11,
@@ -107,7 +117,8 @@
         "startDate": "06/01/2025",
         "description": "Human Resources Manager",
         "contact": "650-550-6641",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 12,
@@ -117,7 +128,8 @@
         "startDate": "10/10/2025",
         "description": "Account Executive",
         "contact": "375-875-4388",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 13,
@@ -127,7 +139,8 @@
         "startDate": "04/14/2025",
         "description": "Accountant III",
         "contact": "216-274-7833",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 14,
@@ -137,7 +150,8 @@
         "startDate": "04/22/2025",
         "description": "Systems Administrator III",
         "contact": "284-710-2529",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 15,
@@ -147,7 +161,8 @@
         "startDate": "04/18/2025",
         "description": "Web Designer III",
         "contact": "461-569-8913",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 16,
@@ -157,7 +172,8 @@
         "startDate": "01/20/2025",
         "description": "Sales Representative",
         "contact": "772-432-7236",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 17,
@@ -167,7 +183,8 @@
         "startDate": "12/25/2025",
         "description": "Information Systems Manager",
         "contact": "541-212-2451",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 18,
@@ -177,7 +194,8 @@
         "startDate": "07/06/2025",
         "description": "Computer Systems Analyst II",
         "contact": "214-215-6212",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 19,
@@ -187,7 +205,8 @@
         "startDate": "01/23/2025",
         "description": "Graphic Designer",
         "contact": "278-738-9037",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 20,
@@ -197,7 +216,8 @@
         "startDate": "10/05/2025",
         "description": "Assistant Professor",
         "contact": "101-767-2311",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 21,
@@ -207,7 +227,8 @@
         "startDate": "08/04/2025",
         "description": "Nurse",
         "contact": "280-606-7763",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 22,
@@ -217,7 +238,8 @@
         "startDate": "04/18/2025",
         "description": "Staff Scientist",
         "contact": "775-692-7887",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 23,
@@ -227,7 +249,8 @@
         "startDate": "12/05/2025",
         "description": "Community Outreach Specialist",
         "contact": "288-392-9153",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 24,
@@ -237,7 +260,8 @@
         "startDate": "04/10/2025",
         "description": "General Manager",
         "contact": "341-512-7474",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 25,
@@ -247,7 +271,8 @@
         "startDate": "01/23/2025",
         "description": "Community Outreach Specialist",
         "contact": "129-895-1323",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 26,
@@ -257,7 +282,8 @@
         "startDate": "10/11/2025",
         "description": "Electrical Engineer",
         "contact": "583-100-0756",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 27,
@@ -267,7 +293,8 @@
         "startDate": "12/01/2025",
         "description": "Office Assistant I",
         "contact": "585-806-7039",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 28,
@@ -277,7 +304,8 @@
         "startDate": "04/12/2025",
         "description": "Senior Editor",
         "contact": "121-434-8832",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 29,
@@ -287,7 +315,8 @@
         "startDate": "12/17/2025",
         "description": "Web Designer II",
         "contact": "766-303-9837",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 30,
@@ -297,7 +326,8 @@
         "startDate": "06/12/2025",
         "description": "Quality Engineer",
         "contact": "842-938-6757",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 31,
@@ -307,7 +337,8 @@
         "startDate": "10/28/2025",
         "description": "VP Quality Control",
         "contact": "230-740-8956",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 32,
@@ -317,7 +348,8 @@
         "startDate": "12/18/2025",
         "description": "Compensation Analyst",
         "contact": "614-848-3353",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 33,
@@ -327,7 +359,8 @@
         "startDate": "08/03/2025",
         "description": "Nurse",
         "contact": "977-601-4438",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 34,
@@ -337,7 +370,8 @@
         "startDate": "04/20/2025",
         "description": "Occupational Therapist",
         "contact": "577-520-4982",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 35,
@@ -347,7 +381,8 @@
         "startDate": "10/30/2025",
         "description": "Help Desk Operator",
         "contact": "276-922-2623",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 36,
@@ -357,7 +392,8 @@
         "startDate": "10/23/2025",
         "description": "Editor",
         "contact": "557-766-5998",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 37,
@@ -367,7 +403,8 @@
         "startDate": "05/01/2025",
         "description": "Research Associate",
         "contact": "621-432-4793",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 38,
@@ -377,7 +414,8 @@
         "startDate": "03/03/2025",
         "description": "Software Engineer III",
         "contact": "777-427-3186",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 39,
@@ -387,7 +425,8 @@
         "startDate": "07/13/2025",
         "description": "Research Associate",
         "contact": "643-252-8619",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 40,
@@ -397,7 +436,8 @@
         "startDate": "12/03/2025",
         "description": "Engineer III",
         "contact": "673-933-4094",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 41,
@@ -407,7 +447,8 @@
         "startDate": "07/23/2025",
         "description": "Desktop Support Technician",
         "contact": "921-919-5348",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 42,
@@ -417,7 +458,8 @@
         "startDate": "01/30/2025",
         "description": "Computer Systems Analyst III",
         "contact": "175-438-3122",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 43,
@@ -427,7 +469,8 @@
         "startDate": "05/15/2025",
         "description": "Automation Specialist IV",
         "contact": "363-974-6370",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 44,
@@ -437,7 +480,8 @@
         "startDate": "08/01/2025",
         "description": "Research Assistant II",
         "contact": "468-851-2787",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 45,
@@ -447,7 +491,8 @@
         "startDate": "04/10/2025",
         "description": "Design Engineer",
         "contact": "319-415-8282",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 46,
@@ -457,7 +502,8 @@
         "startDate": "09/30/2025",
         "description": "Structural Analysis Engineer",
         "contact": "129-247-7209",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 47,
@@ -467,7 +513,8 @@
         "startDate": "11/15/2025",
         "description": "Financial Advisor",
         "contact": "596-204-6613",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 48,
@@ -477,7 +524,8 @@
         "startDate": "10/14/2025",
         "description": "VP Accounting",
         "contact": "292-502-5432",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 49,
@@ -487,7 +535,8 @@
         "startDate": "03/11/2025",
         "description": "Payment Adjustment Coordinator",
         "contact": "717-164-7904",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 50,
@@ -497,7 +546,8 @@
         "startDate": "10/29/2025",
         "description": "Assistant Professor",
         "contact": "618-877-0139",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 51,
@@ -507,7 +557,8 @@
         "startDate": "12/09/2025",
         "description": "Biostatistician III",
         "contact": "328-151-4542",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 52,
@@ -517,7 +568,8 @@
         "startDate": "08/29/2025",
         "description": "Programmer Analyst II",
         "contact": "750-481-9477",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 53,
@@ -527,7 +579,8 @@
         "startDate": "10/11/2025",
         "description": "Director of Sales",
         "contact": "140-514-5032",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 54,
@@ -537,7 +590,8 @@
         "startDate": "07/15/2025",
         "description": "VP Marketing",
         "contact": "322-298-7914",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 55,
@@ -547,7 +601,8 @@
         "startDate": "12/25/2025",
         "description": "Office Assistant IV",
         "contact": "106-233-8495",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 56,
@@ -557,7 +612,8 @@
         "startDate": "03/20/2025",
         "description": "Librarian",
         "contact": "888-637-3887",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 57,
@@ -567,7 +623,8 @@
         "startDate": "12/08/2025",
         "description": "Automation Specialist II",
         "contact": "598-109-3924",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 58,
@@ -577,7 +634,8 @@
         "startDate": "11/14/2025",
         "description": "Librarian",
         "contact": "816-854-8526",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 59,
@@ -587,7 +645,8 @@
         "startDate": "02/20/2025",
         "description": "Graphic Designer",
         "contact": "828-203-2787",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 60,
@@ -597,7 +656,8 @@
         "startDate": "05/05/2025",
         "description": "Accountant II",
         "contact": "167-295-7381",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 61,
@@ -607,7 +667,8 @@
         "startDate": "10/19/2025",
         "description": "Professor",
         "contact": "939-777-3058",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 62,
@@ -617,7 +678,8 @@
         "startDate": "01/20/2025",
         "description": "Developer III",
         "contact": "533-778-6881",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 63,
@@ -627,7 +689,8 @@
         "startDate": "01/02/2026",
         "description": "Assistant Manager",
         "contact": "274-467-7288",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 64,
@@ -637,7 +700,8 @@
         "startDate": "08/08/2025",
         "description": "Data Coordinator",
         "contact": "236-832-6721",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 65,
@@ -647,7 +711,8 @@
         "startDate": "11/02/2025",
         "description": "Quality Control Specialist",
         "contact": "931-571-2757",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 66,
@@ -657,7 +722,8 @@
         "startDate": "09/17/2025",
         "description": "Structural Analysis Engineer",
         "contact": "841-118-5524",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 67,
@@ -667,7 +733,8 @@
         "startDate": "04/23/2025",
         "description": "Marketing Manager",
         "contact": "731-820-3611",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 68,
@@ -677,7 +744,8 @@
         "startDate": "04/28/2025",
         "description": "Sales Associate",
         "contact": "598-289-9260",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 69,
@@ -687,7 +755,8 @@
         "startDate": "04/22/2025",
         "description": "Developer II",
         "contact": "107-361-0288",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 70,
@@ -697,7 +766,8 @@
         "startDate": "10/20/2025",
         "description": "Nurse Practicioner",
         "contact": "639-947-0911",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 71,
@@ -707,7 +777,8 @@
         "startDate": "09/23/2025",
         "description": "Research Nurse",
         "contact": "580-817-6081",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 72,
@@ -717,7 +788,8 @@
         "startDate": "09/29/2025",
         "description": "Health Coach I",
         "contact": "277-164-9390",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 73,
@@ -727,7 +799,8 @@
         "startDate": "07/04/2025",
         "description": "Geologist III",
         "contact": "501-702-7536",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 74,
@@ -737,7 +810,8 @@
         "startDate": "05/26/2025",
         "description": "Administrative Officer",
         "contact": "525-240-7524",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 75,
@@ -747,7 +821,8 @@
         "startDate": "04/05/2025",
         "description": "Account Executive",
         "contact": "113-452-2006",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 76,
@@ -757,7 +832,8 @@
         "startDate": "05/24/2025",
         "description": "Web Designer III",
         "contact": "840-717-1832",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 77,
@@ -767,7 +843,8 @@
         "startDate": "01/29/2025",
         "description": "Web Developer II",
         "contact": "683-543-8265",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 78,
@@ -777,7 +854,8 @@
         "startDate": "05/26/2025",
         "description": "Automation Specialist II",
         "contact": "210-192-8016",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 79,
@@ -787,7 +865,8 @@
         "startDate": "01/11/2026",
         "description": "Product Engineer",
         "contact": "100-799-4623",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 80,
@@ -797,7 +876,8 @@
         "startDate": "07/17/2025",
         "description": "Data Coordinator",
         "contact": "125-903-6489",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 81,
@@ -807,7 +887,8 @@
         "startDate": "06/20/2025",
         "description": "Data Coordinator",
         "contact": "650-378-8900",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 82,
@@ -817,7 +898,8 @@
         "startDate": "04/11/2025",
         "description": "Geologist III",
         "contact": "179-936-9558",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 83,
@@ -827,7 +909,8 @@
         "startDate": "03/07/2025",
         "description": "Legal Assistant",
         "contact": "500-130-4844",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 84,
@@ -837,7 +920,8 @@
         "startDate": "11/21/2025",
         "description": "Internal Auditor",
         "contact": "910-203-1932",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 85,
@@ -847,7 +931,8 @@
         "startDate": "11/05/2025",
         "description": "Civil Engineer",
         "contact": "789-330-8757",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 86,
@@ -857,7 +942,8 @@
         "startDate": "07/08/2025",
         "description": "Nuclear Power Engineer",
         "contact": "188-507-4393",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 87,
@@ -867,7 +953,8 @@
         "startDate": "07/02/2025",
         "description": "Staff Accountant IV",
         "contact": "761-488-6903",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 88,
@@ -877,7 +964,8 @@
         "startDate": "10/28/2025",
         "description": "Senior Financial Analyst",
         "contact": "442-259-7814",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 89,
@@ -887,7 +975,8 @@
         "startDate": "04/09/2025",
         "description": "Clinical Specialist",
         "contact": "896-701-8100",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 90,
@@ -897,7 +986,8 @@
         "startDate": "04/24/2025",
         "description": "Librarian",
         "contact": "204-715-3211",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 91,
@@ -907,7 +997,8 @@
         "startDate": "01/15/2026",
         "description": "Junior Executive",
         "contact": "245-933-1391",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 92,
@@ -917,7 +1008,8 @@
         "startDate": "12/14/2025",
         "description": "Research Associate",
         "contact": "419-800-5029",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 93,
@@ -927,7 +1019,8 @@
         "startDate": "12/22/2025",
         "description": "Quality Engineer",
         "contact": "137-690-7010",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 94,
@@ -937,7 +1030,8 @@
         "startDate": "09/13/2025",
         "description": "Physical Therapy Assistant",
         "contact": "452-759-3015",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 95,
@@ -947,7 +1041,8 @@
         "startDate": "05/31/2025",
         "description": "Senior Sales Associate",
         "contact": "180-180-5964",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 96,
@@ -957,7 +1052,8 @@
         "startDate": "07/19/2025",
         "description": "General Manager",
         "contact": "897-366-3228",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 97,
@@ -967,7 +1063,8 @@
         "startDate": "05/22/2025",
         "description": "Research Nurse",
         "contact": "692-982-9926",
-        "status": "INACTIVE"
+        "status": "INACTIVE",
+        "password": "password"
     },
     {
         "id": 98,
@@ -977,7 +1074,8 @@
         "startDate": "08/14/2025",
         "description": "Accountant III",
         "contact": "590-498-1492",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 99,
@@ -987,7 +1085,8 @@
         "startDate": "12/21/2025",
         "description": "Web Designer IV",
         "contact": "671-538-0895",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     },
     {
         "id": 100,
@@ -997,6 +1096,7 @@
         "startDate": "02/13/2025",
         "description": "Biostatistician III",
         "contact": "354-316-8504",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "password": "password"
     }
 ]
