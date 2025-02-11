@@ -33,46 +33,46 @@ const baseUrl = '/bookings'
  *                     example: 1
  *                   guestName:
  *                     type: string
- *                     example: https://urlFoto.com
+ *                     example: "https://urlFoto.com"
  *                   orderDate:
  *                     type: string
- *                     example: 07/30/2042             
+ *                     example: "07/30/2042"
  *                   orderDateHour:
  *                     type: string
- *                     example: 6:53 PM 
+ *                     example: "6:53 PM"
  *                   checkIn:
  *                     type: string
- *                     example: 10/16/2029
+ *                     example: "10/16/2029"
  *                   checkInHour:
  *                      type: string
- *                      example: 7:45 AM
+ *                      example: "7:45 AM"
  *                   checkOut: 
  *                      type: string
- *                      example: 10/16/2029
+ *                      example: "10/16/2029"
  *                   checkOutHour:
  *                      type: string
- *                      example: 7:45 PM
+ *                      example: "7:45 PM"
  *                   specialRequest: 
  *                      type: string
- *                      example: true
+ *                      example: "true"
  *                   type:
  *                      type: string
- *                      example: Premium A
+ *                      example: "Premium A"
  *                   number:
  *                      type: integer
  *                      example: 5643
  *                   status:
  *                      type: string
- *                      example: Check In
+ *                      example: "Check In"
  *                   price:
  *                      type: string
- *                      example: $101.97
+ *                      example: "$101.97"
  *                   description:
  *                      type: string
- *                      example: Lorem ipsum
+ *                      example: "Lorem ipsum"
  *                   amenities: 
  *                      type: string[]
- *                      example: ['Wifi', 'Mini Bar'] 
+ *                      example: ['Wifi', 'Mini Bar']
  */
 
 bookingRouter.get(baseUrl, (req: Request, res: Response) => {

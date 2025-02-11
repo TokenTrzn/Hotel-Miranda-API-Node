@@ -31,28 +31,28 @@ const baseUrl = '/users'
  *                     example: 1
  *                   photo:
  *                     type: string
- *                     example: https://urlFoto.com          
+ *                     example: "https://urlFoto.com"
  *                   name:
  *                     type: string
- *                     example: Alberto Gil           
+ *                     example: "Alberto Gil"
  *                   email:
  *                     type: string
- *                     example: alberto@gmail.com 
+ *                     example: "alberto@gmail.com "
  *                   startDate:
  *                      type: string
- *                      example: 08/06/2025
+ *                      example: "08/06/2025"
  *                   description: 
  *                      type: string
- *                      example: Lorem ipsun
+ *                      example: "Lorem ipsun"
  *                   contact:
  *                      type: string
- *                      example: 971.927-8764
+ *                      example: "971.927-8764"
  *                   status:
  *                      type: string
- *                      example: ACTIVE
+ *                      example: "ACTIVE"
  *                   password: 
  *                      type: string
- *                      example: password 
+ *                      example: "password"
  */
 
 userRouter.get(baseUrl, (req: Request, res: Response) => {

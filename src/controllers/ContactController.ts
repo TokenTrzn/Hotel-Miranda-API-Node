@@ -12,7 +12,7 @@ const baseUrl = '/contacts'
  */
 /**
  * @swagger
- * /api/v1/contacts :
+ * /api/v1/contacts:
  *   get:
  *     summary: Obtiene una lista de contacts
  *     tags: [Contacts]
@@ -31,22 +31,22 @@ const baseUrl = '/contacts'
  *                     example: 1 
  *                   date:
  *                      type: string
- *                      example: 08/30/2024             
+ *                      example: "08/30/2024"
  *                   hour:
  *                      type: string
- *                       example: 5:18 PM
+ *                       example: "5:18 PM"
  *                   name:
  *                     type: string
- *                     example: Alberto Gil 
+ *                     example: "Alberto Gil "
  *                   email:
  *                      type: string
- *                      example: alberto@gmail.com
+ *                      example: "alberto@gmail.com"
  *                   phone:
  *                      type: string
- *                      example: 593-825-5086
+ *                      example: "593-825-5086"
  *                   comment:
  *                      type: string
- *                      example: Lorem ipsun
+ *                      example: "Lorem ipsun"
  *                   isArchived:
  *                      type: boolean
  *                      example: true              

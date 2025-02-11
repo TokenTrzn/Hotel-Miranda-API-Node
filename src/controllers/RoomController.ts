@@ -31,28 +31,28 @@ const baseUrl = '/rooms'
  *                     example: 1
  *                   photo:
  *                     type: string
- *                     example: https://urlFoto.com
+ *                     example: "https://urlFoto.com"
  *                   number:
  *                     type: integer
  *                     example: 45590             
  *                   name:
  *                     type: string
- *                     example: Alberto Gil 
+ *                     example: "Alberto Gil "
  *                   type:
  *                     type: string
- *                     example: Double Bed
+ *                     example: "Double Bed"
  *                   amenities:
  *                      type: string[]
  *                      example: ['Wifi', 'Mini Bar']
  *                   price: 
  *                      type: string
- *                      example: $116.34
+ *                      example: "$116.34"
  *                   offerPrice:
  *                      type: string
- *                      example: $98.65
+ *                      example: "$98.65"
  *                   status: 
  *                      type: string
- *                      example: Booked
+ *                      example: "Booked"
  */
 
 roomRouter.get(baseUrl, (req: Request, res: Response) => {
