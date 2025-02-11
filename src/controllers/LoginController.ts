@@ -13,8 +13,8 @@ loginRouter.post('', (req: Request, res: Response) => {
     if (user.length === 0) {
         res.status(400).send('Usuario no encontrado')
     }
-    if (!process.env.TOKEN_SECRET) {
-        res.status(500).send('Error del servidor: TOKEN_SECRET no está definido')
+    if (!process.env.SECRET_TOKEN) {
+        res.status(500).send('Error del servidor: SECRET_TOKEN no está definido')
     }
 
     const validPassword = bcrypt.compare(password, user[0].password).then((result) => {
@@ -22,7 +22,7 @@ loginRouter.post('', (req: Request, res: Response) => {
             res.status(400).send({token: 'Usuario o contraseña incorrectos'})
             return
         } else {
-            const token = jwt.sign({ email: user[0].email }, process.env.TOKEN_SECRET as string, {expiresIn: '1h'})
+            const token = jwt.sign({ email: user[0].email }, process.env.SECRET_TOKEN as string, {expiresIn: '1h'})
             res.status(200).send({token: token})
         }
     })

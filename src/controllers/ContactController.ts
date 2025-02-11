@@ -37,7 +37,7 @@ const baseUrl = '/contacts'
  *                       example: "5:18 PM"
  *                   name:
  *                     type: string
- *                     example: "Alberto Gil "
+ *                     example: "Alberto Gil"
  *                   email:
  *                      type: string
  *                      example: "alberto@gmail.com"

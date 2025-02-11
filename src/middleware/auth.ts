@@ -8,7 +8,7 @@ declare module "express-serve-static-core" {
   }
 
 export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
-    const token = req.headers['authorization']
+    const token = req.headers.authorization
     if (req.query.error) {
         res.status(400).json({ message: 'Bad request' })
         return
