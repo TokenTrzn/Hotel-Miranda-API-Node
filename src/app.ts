@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import { loginRouter } from './controllers/LoginController'
 import { authenticate } from './middleware/auth'
+import { roomRouter } from './controllers/RoomController'
+import { bookingRouter } from './controllers/BookingController'
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -29,7 +31,8 @@ const swaggerOptions = {
 
 app.use(express.json())
 app.use('/login', loginRouter)
-app.use('/api/v1/bookings', authenticate, bookingsRoute)
+app.use('/api/v1/rooms', authenticate, roomRouter)
+app.use('/api/v1/bookings', authenticate, bookingRouter)
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 

@@ -84,10 +84,10 @@ roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 })
 
 roomRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
-    const deletedRoom = roomService.delete(parseInt(req.params.id));
+    const deletedRoom = roomService.delete(parseInt(req.params.id))
     if (deletedRoom) {
-        res.status(204).json({ message: 'Room deleted' });
+        res.status(204).json({ message: 'Room deleted' })
     } else {
-        res.status(404).json({ message: 'Room not found' });
+        res.status(404).json({ message: 'Room not found' })
     }
-});
+})
