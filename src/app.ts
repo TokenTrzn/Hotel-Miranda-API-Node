@@ -4,6 +4,8 @@ import { loginRouter } from './controllers/LoginController'
 import { authenticate } from './middleware/auth'
 import { roomRouter } from './controllers/RoomController'
 import { bookingRouter } from './controllers/BookingController'
+import { contactRouter } from './controllers/ContactController'
+import { userRouter } from './controllers/UserController'
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -33,6 +35,8 @@ app.use(express.json())
 app.use('/login', loginRouter)
 app.use('/api/v1/rooms', authenticate, roomRouter)
 app.use('/api/v1/bookings', authenticate, bookingRouter)
+app.use('/api/v1/contact', authenticate, contactRouter)
+app.use('/api/v1/users', authenticate, userRouter)
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 
