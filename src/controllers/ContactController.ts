@@ -27,17 +27,17 @@ const baseUrl = '/contacts'
  *                 type: object
  *                 properties:
  *                   id:
- *                     type: integer
- *                     example: 1 
+ *                      type: integer
+ *                      example: 1 
  *                   date:
  *                      type: string
  *                      example: "08/30/2024"
  *                   hour:
  *                      type: string
- *                       example: "5:18 PM"
+ *                      example: "5:18 PM"
  *                   name:
- *                     type: string
- *                     example: "Alberto Gil"
+ *                      type: string
+ *                      example: "Alberto Gil"
  *                   email:
  *                      type: string
  *                      example: "alberto@gmail.com"
@@ -54,6 +54,7 @@ const baseUrl = '/contacts'
 
 contactRouter.get(baseUrl, (req: Request, res: Response) => {
     const contactList = contactService.fetchAll()
+    res.json(contactList)
 })
 
 contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
