@@ -1,32 +1,36 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
+import { AuthInterface } from "../interfaces/AuthInterface";
 
-declare module "express-serve-static-core" {
+declare module "express" {
     interface Request {
-      user?: any;
+      user?: AuthInterface;
     }
   }
 
-export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
-    const authHeader = req.headers['authorization']
+export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.headers['authorization'] || req.query.token
 
-    if (req.query.error) {
-        res.status(400).json({ message: 'Bad request' })
-        return
+    if (!authHeader || typeof authHeader !== 'string') {
+        return res.status(403).json({ message: 'No token provided' })
     }
 
-    if (!authHeader) {
-        res.status(403).json({ message: 'No token provided' })
-        return
+    const token = process.env.SECRET_TOKEN
+    
+    if (!token) {
+        return res.status(500).json({ message: 'No token provided' })
     }
 
-    const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader
-
-    jwt.verify(token, process.env.SECRET_TOKEN as string, (err, decoded) => {
+    jwt.verify(authHeader, token, (err, decoded) => {
         if (err) {
-            return res.status(401).json({ message: 'Unauthorized' })
+            return res.status(403).json({ message: 'Unauthorized' })
         }
-        req.user = decoded
+
+        const user = decoded as AuthInterface
+        if (!user || !user.user) {
+            return res.status(403).json({ message: 'Invalid token' })
+        }
+        req.user = user
         next()
     })
 }
