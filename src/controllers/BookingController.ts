@@ -144,7 +144,7 @@ bookingRouter.get(baseUrl, (req: Request, res: Response) => {
 
 bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
     const booking = bookingService.fetchById(parseInt(req.params.id))
-    if (booking) {
+    if (booking !== null) {
         res.json(booking)
     } else {
         res.status(404).json({ message: 'Booking not found' })

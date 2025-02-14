@@ -107,7 +107,7 @@ userRouter.get(baseUrl, (req: Request, res: Response) => {
 
 userRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
     const user = userService.fetchById(parseInt(req.params.id))
-    if (user) {
+    if (user !== null) {
         res.json(user)
     } else {
         res.status(404).json({ message: 'User not found' })

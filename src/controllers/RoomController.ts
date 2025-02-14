@@ -107,7 +107,7 @@ roomRouter.get(baseUrl, (req: Request, res: Response) => {
 
 roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
     const room = roomService.fetchById(parseInt(req.params.id))
-    if (room) {
+    if (room !== null) {
         res.json(room)
     } else {
         res.status(404).json({ message: 'Room not found' })

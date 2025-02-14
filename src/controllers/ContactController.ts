@@ -101,7 +101,7 @@ contactRouter.get(baseUrl, (req: Request, res: Response) => {
 
 contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
     const contact = contactService.fetchById(parseInt(req.params.id))
-    if (contact) {
+    if (contact !== null) {
         res.json(contact)
     } else {
         res.status(404).json({ message: 'Contact not found' })
