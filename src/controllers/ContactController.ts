@@ -12,7 +12,7 @@ const baseUrl = '/contacts'
  */
 /**
  * @swagger
- * /api/v1/contacts:
+ * /contacts:
  *   get:
  *     summary: Get all contacts
  *     tags: [Contacts]
@@ -59,7 +59,7 @@ contactRouter.get(baseUrl, (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/contacts/:id :
+ * /contacts/:id :
  *   get:
  *     summary: Get a contact by Id
  *     tags: [Contacts]
@@ -110,7 +110,7 @@ contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/contacts/create :
+ * /contacts/create :
  *   post:
  *     summary: Create a contact
  *     tags: [Contacts]
@@ -157,7 +157,7 @@ contactRouter.post(baseUrl, (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/contacts/:id :
+ * /contacts/:id :
  *   put:
  *     summary: Edit a contact
  *     tags: [Contacts]
@@ -208,7 +208,7 @@ contactRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/contacts/:id :
+ * /contacts/:id :
  *   delete:
  *     summary: Delete a contact
  *     tags: [Contacts]

@@ -3,7 +3,7 @@ import { BookingService } from "../services/BookingService"
 
 export const bookingRouter = Router()
 const bookingService = new BookingService()
-const baseUrl = 'api/v1/bookings'
+const baseUrl = '/bookings'
 
 /**
  * @swagger
@@ -13,7 +13,7 @@ const baseUrl = 'api/v1/bookings'
  */
 /**
  *  @swagger
- * /api/v1/bookings :
+ * /bookings :
  *   get:
  *     summary: Get all bookings
  *     tags: [Bookings]
@@ -81,7 +81,7 @@ bookingRouter.get(baseUrl, (req: Request, res: Response) => {
 
 /**
  *  @swagger
- * /api/v1/bookings/:id :
+ * /bookings/:id :
  *   get:
  *     summary: Get a booking by Id
  *     tags: [Bookings]
@@ -153,7 +153,7 @@ bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  *  @swagger
- * /api/v1/bookings/create :
+ * /bookings/create :
  *   post:
  *     summary: Create a booking
  *     tags: [Bookings]
@@ -221,7 +221,7 @@ bookingRouter.post(baseUrl, (req: Request, res: Response) => {
 
 /**
  *  @swagger
- * /api/v1/bookings/:id :
+ * /bookings/:id :
  *   put:
  *     summary: Edit a booking
  *     tags: [Bookings]
@@ -293,7 +293,7 @@ bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  *  @swagger
- * /api/v1/bookings/:id :
+ * /bookings/:id :
  *   delete:
  *     summary: Delete a booking
  *     tags: [Bookings]

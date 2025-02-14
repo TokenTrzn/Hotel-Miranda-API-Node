@@ -12,7 +12,7 @@ const baseUrl = '/users'
  */
 /**
  * @swagger
- * /api/v1/users :
+ * /users :
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -62,7 +62,7 @@ userRouter.get(baseUrl, (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/:id :
+ * /users/:id :
  *   get:
  *     summary: Get a user by Id
  *     tags: [Users]
@@ -116,7 +116,7 @@ userRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/create :
+ * /users/create :
  *   post:
  *     summary: Create a user
  *     tags: [Users]
@@ -166,7 +166,7 @@ userRouter.post(baseUrl, (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/:id :
+ * /users/:id :
  *   put:
  *     summary: Edit a user
  *     tags: [Users]
@@ -220,7 +220,7 @@ userRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/:id :
+ * /users/:id :
  *   delete:
  *     summary: Delete a user
  *     tags: [Users]

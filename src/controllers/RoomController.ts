@@ -3,7 +3,7 @@ import { RoomService } from "../services/RoomService"
 
 export const roomRouter = Router()
 const roomService = new RoomService()
-const baseUrl = 'api/v1/rooms'
+const baseUrl = '/rooms'
 /**
  * @swagger
  * tags:
@@ -12,7 +12,7 @@ const baseUrl = 'api/v1/rooms'
  */
 /**
  * @swagger
- * /api/v1/rooms :
+ * /rooms :
  *   get:
  *     summary: Get all rooms
  *     tags: [Rooms]
@@ -62,7 +62,7 @@ roomRouter.get(baseUrl, (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/rooms/:id :
+ * /rooms/:id :
  *   get:
  *     summary: Get a room by Id
  *     tags: [Rooms]
@@ -116,7 +116,7 @@ roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/rooms/create :
+ * /rooms/create :
  *   post:
  *     summary: Crea una room
  *     tags: [Rooms]
@@ -166,7 +166,7 @@ roomRouter.post(baseUrl + '/create', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/rooms/:id :
+ * /rooms/:id :
  *   put:
  *     summary: Edit a room
  *     tags: [Rooms]
@@ -220,7 +220,7 @@ roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/rooms/:id :
+ * /rooms/:id :
  *   delete:
  *     summary: Delete a room
  *     tags: [Rooms]

@@ -15,6 +15,9 @@ dotenv.config()
 const app = express()
 const port = process.env.PORT || 3000
 
+app.use(express.json())
+
+
 const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
@@ -32,20 +35,19 @@ const swaggerOptions = {
       apis: ['./src/controllers/*.ts']
 }
 
-app.use(express.json())
-app.use('/login', loginRouter)
-app.use('/api/v1/rooms', roomRouter)
-app.use('/api/v1/bookings', bookingRouter)
-app.use('/api/v1/contacts', contactRouter)
-app.use('/api/v1/users', userRouter)
-
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
+
+app.use(loginRouter)
+app.use(roomRouter)
+app.use(bookingRouter)
+app.use(contactRouter)
+app.use(userRouter)
+
+app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
 app.get('/live', (req: Request, res: Response) => {
     res.send(`${new Date().toISOString()}`)
 })
-
-app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
