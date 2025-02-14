@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express"
 import { BookingService } from "../services/BookingService"
 
-
 export const bookingRouter = Router()
 const bookingService = new BookingService()
 const baseUrl = '/bookings'

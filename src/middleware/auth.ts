@@ -8,20 +8,21 @@ declare module "express-serve-static-core" {
   }
 
 export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
-    const token = req.headers['authorization']
+    const authHeader = req.headers['authorization']
+
     if (req.query.error) {
         res.status(400).json({ message: 'Bad request' })
         return
     }
 
-    if (!token) {
+    if (!authHeader) {
         res.status(403).json({ message: 'No token provided' })
         return
     }
 
-    next()
+    const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader
 
-    jwt.verify(token, process.env.SECRET_KEY as string, (err, decoded) => {
+    jwt.verify(token, process.env.SECRET_TOKEN as string, (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Unauthorized' })
         }
