@@ -28,7 +28,7 @@ const baseUrl = '/bookings'
  *                 type: object
  *                 properties:
  *                   id:
- *                     type: integer
+ *                     type: number
  *                     example: 1
  *                   guestName:
  *                     type: string
@@ -58,7 +58,7 @@ const baseUrl = '/bookings'
  *                      type: string
  *                      example: "Premium A"
  *                   number:
- *                      type: integer
+ *                      type: number
  *                      example: 5643
  *                   status:
  *                      type: string

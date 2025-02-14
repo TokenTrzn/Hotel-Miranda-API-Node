@@ -3,7 +3,7 @@ import { RoomService } from "../services/RoomService"
 
 export const roomRouter = Router()
 const roomService = new RoomService()
-const baseUrl = '/rooms'
+const baseUrl = 'api/v1/rooms'
 /**
  * @swagger
  * tags:
@@ -14,11 +14,165 @@ const baseUrl = '/rooms'
  * @swagger
  * /api/v1/rooms :
  *   get:
- *     summary: Obtiene una lista de rooms
+ *     summary: Get all rooms
  *     tags: [Rooms]
  *     responses:
  *       200:
- *         description: Lista de rooms
+ *         description: Get all rooms
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                     example: 1
+ *                   photo:
+ *                     type: string
+ *                     example: "https://urlFoto.com"
+ *                   number:
+ *                     type: number
+ *                     example: 45590             
+ *                   name:
+ *                     type: string
+ *                     example: "Alberto Gil "
+ *                   type:
+ *                     type: string
+ *                     example: "Double Bed"
+ *                   amenities:
+ *                      type: string[]
+ *                      example: ['Wifi', 'Mini Bar']
+ *                   price: 
+ *                      type: string
+ *                      example: "$116.34"
+ *                   offerPrice:
+ *                      type: string
+ *                      example: "$98.65"
+ *                   status: 
+ *                      type: string
+ *                      example: "Booked"
+ */
+
+roomRouter.get(baseUrl, (req: Request, res: Response) => {
+    const roomList = roomService.fetchAll()
+    res.json(roomList)
+})
+
+/**
+ * @swagger
+ * /api/v1/rooms/:id :
+ *   get:
+ *     summary: Get a room by Id
+ *     tags: [Rooms]
+ *     responses:
+ *       200:
+ *         description: Get a room by Id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                     example: 1
+ *                   photo:
+ *                     type: string
+ *                     example: "https://urlFoto.com"
+ *                   number:
+ *                     type: number
+ *                     example: 45590             
+ *                   name:
+ *                     type: string
+ *                     example: "Alberto Gil "
+ *                   type:
+ *                     type: string
+ *                     example: "Double Bed"
+ *                   amenities:
+ *                      type: string[]
+ *                      example: ['Wifi', 'Mini Bar']
+ *                   price: 
+ *                      type: string
+ *                      example: "$116.34"
+ *                   offerPrice:
+ *                      type: string
+ *                      example: "$98.65"
+ *                   status: 
+ *                      type: string
+ *                      example: "Booked"
+ */
+
+roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
+    const room = roomService.fetchById(parseInt(req.params.id))
+    if (room) {
+        res.json(room)
+    } else {
+        res.status(404).json({ message: 'Room not found' })
+    }
+})
+
+/**
+ * @swagger
+ * /api/v1/rooms/create :
+ *   post:
+ *     summary: Crea una room
+ *     tags: [Rooms]
+ *     responses:
+ *       200:
+ *         description: Crea una room
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                     example: 1
+ *                   photo:
+ *                     type: string
+ *                     example: "https://urlFoto.com"
+ *                   number:
+ *                     type: number
+ *                     example: 45590             
+ *                   name:
+ *                     type: string
+ *                     example: "Alberto Gil "
+ *                   type:
+ *                     type: string
+ *                     example: "Double Bed"
+ *                   amenities:
+ *                      type: string[]
+ *                      example: ['Wifi', 'Mini Bar']
+ *                   price: 
+ *                      type: string
+ *                      example: "$116.34"
+ *                   offerPrice:
+ *                      type: string
+ *                      example: "$98.65"
+ *                   status: 
+ *                      type: string
+ *                      example: "Booked"
+ */
+
+roomRouter.post(baseUrl + '/create', (req: Request, res: Response) => {
+    const newRoom = roomService.create(req.body)
+    res.status(201).json(newRoom)
+})
+
+/**
+ * @swagger
+ * /api/v1/rooms/:id :
+ *   put:
+ *     summary: Edit a room
+ *     tags: [Rooms]
+ *     responses:
+ *       200:
+ *         description: Edit a room
  *         content:
  *           application/json:
  *             schema:
@@ -55,25 +209,6 @@ const baseUrl = '/rooms'
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl, (req: Request, res: Response) => {
-    const roomList = roomService.fetchAll()
-    res.json(roomList)
-})
-
-roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
-    const room = roomService.fetchById(parseInt(req.params.id))
-    if (room) {
-        res.json(room)
-    } else {
-        res.status(404).json({ message: 'Room not found' })
-    }
-})
-
-roomRouter.post(baseUrl, (req: Request, res: Response) => {
-    const newRoom = roomService.create(req.body)
-    res.status(201).json(newRoom)
-})
-
 roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
     const updatedRoom = roomService.update(parseInt(req.params.id), req.body)
     if (updatedRoom !== null) {
@@ -82,6 +217,51 @@ roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
         res.status(404).json({ message: 'Room not found' })
     }
 })
+
+/**
+ * @swagger
+ * /api/v1/rooms/:id :
+ *   delete:
+ *     summary: Delete a room
+ *     tags: [Rooms]
+ *     responses:
+ *       200:
+ *         description: Delete a room
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   photo:
+ *                     type: string
+ *                     example: "https://urlFoto.com"
+ *                   number:
+ *                     type: integer
+ *                     example: 45590             
+ *                   name:
+ *                     type: string
+ *                     example: "Alberto Gil "
+ *                   type:
+ *                     type: string
+ *                     example: "Double Bed"
+ *                   amenities:
+ *                      type: string[]
+ *                      example: ['Wifi', 'Mini Bar']
+ *                   price: 
+ *                      type: string
+ *                      example: "$116.34"
+ *                   offerPrice:
+ *                      type: string
+ *                      example: "$98.65"
+ *                   status: 
+ *                      type: string
+ *                      example: "Booked"
+ */
 
 roomRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
     const deletedRoom = roomService.delete(parseInt(req.params.id))

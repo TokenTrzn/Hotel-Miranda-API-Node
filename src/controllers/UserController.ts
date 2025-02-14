@@ -27,7 +27,7 @@ const baseUrl = '/users'
  *                 type: object
  *                 properties:
  *                   id:
- *                     type: integer
+ *                     type: number
  *                     example: 1
  *                   photo:
  *                     type: string

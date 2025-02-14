@@ -27,7 +27,7 @@ const baseUrl = '/contacts'
  *                 type: object
  *                 properties:
  *                   id:
- *                      type: integer
+ *                      type: number
  *                      example: 1 
  *                   date:
  *                      type: string
