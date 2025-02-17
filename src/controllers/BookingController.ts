@@ -52,8 +52,8 @@ const baseUrl = '/bookings'
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -120,8 +120,8 @@ bookingRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -192,8 +192,8 @@ bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -260,8 +260,8 @@ bookingRouter.post(baseUrl, (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -332,8 +332,8 @@ bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
