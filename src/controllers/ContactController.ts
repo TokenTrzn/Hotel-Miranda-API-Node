@@ -52,8 +52,8 @@ const baseUrl = '/contacts'
  *                      example: true              
  */
 
-contactRouter.get(baseUrl, (req: Request, res: Response) => {
-    const contactList = contactService.fetchAll()
+contactRouter.get(baseUrl, async (req: Request, res: Response) => {
+    const contactList = await contactService.fetchAll()
     res.json(contactList)
 })
 
@@ -99,8 +99,8 @@ contactRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
-    const contact = contactService.fetchById(parseInt(req.params.id))
+contactRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const contact = await contactService.fetchById(parseInt(req.params.id))
     if (contact !== null) {
         res.json(contact)
     } else {
@@ -150,8 +150,8 @@ contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.post(baseUrl, (req: Request, res: Response) => {
-    const newContact = contactService.create(req.body)
+contactRouter.post(baseUrl, async (req: Request, res: Response) => {
+    const newContact = await contactService.create(req.body)
     res.status(201).json(newContact)
 })
 
@@ -197,8 +197,8 @@ contactRouter.post(baseUrl, (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
-    const updateContact = contactService.update(parseInt(req.params.id), req.body)
+contactRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const updateContact = await contactService.update(parseInt(req.params.id), req.body)
     if (updateContact !== null) {
         res.status(204).json(updateContact)
     } else {
@@ -248,8 +248,8 @@ contactRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
-    const deletedContact = contactService.delete(parseInt(req.params.id))
+contactRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const deletedContact = await contactService.delete(parseInt(req.params.id))
     if (deletedContact) {
         res.status(204).json({ message: 'Contact deleted' })
     } else {
