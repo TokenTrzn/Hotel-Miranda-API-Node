@@ -3,7 +3,6 @@ import { ContactService } from "../services/ContactService";
 
 export const contactRouter = Router()
 const contactService = new ContactService()
-const baseUrl = '/contacts'
 /**
  * @swagger
  * tags:
@@ -12,7 +11,7 @@ const baseUrl = '/contacts'
  */
 /**
  * @swagger
- * /contacts:
+ * /api/v1/contacts:
  *   get:
  *     summary: Get all contacts
  *     tags: [Contacts]
@@ -52,14 +51,14 @@ const baseUrl = '/contacts'
  *                      example: true              
  */
 
-contactRouter.get(baseUrl, (req: Request, res: Response) => {
+contactRouter.get('/api/v1/contacts', (req: Request, res: Response) => {
     const contactList = contactService.fetchAll()
     res.json(contactList)
 })
 
 /**
  * @swagger
- * /contacts/:id :
+ * /api/v1/contacts/:id :
  *   get:
  *     summary: Get a contact by Id
  *     tags: [Contacts]
@@ -99,7 +98,7 @@ contactRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
+contactRouter.get('/api/v1/contacts/:id', (req: Request, res: Response) => {
     const contact = contactService.fetchById(parseInt(req.params.id))
     if (contact !== null) {
         res.json(contact)
@@ -110,7 +109,7 @@ contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /contacts/create :
+ * /api/v1/contacts :
  *   post:
  *     summary: Create a contact
  *     tags: [Contacts]
@@ -150,14 +149,14 @@ contactRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.post(baseUrl, (req: Request, res: Response) => {
+contactRouter.post('/api/v1/contacts', (req: Request, res: Response) => {
     const newContact = contactService.create(req.body)
     res.status(201).json(newContact)
 })
 
 /**
  * @swagger
- * /contacts/:id :
+ * /api/v1/contacts/:id :
  *   put:
  *     summary: Edit a contact
  *     tags: [Contacts]
@@ -197,7 +196,7 @@ contactRouter.post(baseUrl, (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
+contactRouter.put('/api/v1/contacts/:id', (req: Request, res: Response) => {
     const updateContact = contactService.update(parseInt(req.params.id), req.body)
     if (updateContact !== null) {
         res.status(204).json(updateContact)
@@ -208,7 +207,7 @@ contactRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /contacts/:id :
+ * /api/v1/contacts/:id :
  *   delete:
  *     summary: Delete a contact
  *     tags: [Contacts]
@@ -248,7 +247,7 @@ contactRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
+contactRouter.delete('/api/v1/contacts/:id', (req: Request, res: Response) => {
     const deletedContact = contactService.delete(parseInt(req.params.id))
     if (deletedContact) {
         res.status(204).json({ message: 'Contact deleted' })

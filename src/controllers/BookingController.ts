@@ -1,9 +1,11 @@
 import { Request, Response, Router } from "express"
 import { BookingService } from "../services/BookingService"
+import { RoomService } from "../services/RoomService"
+import { authenticate } from "../middleware/auth"
 
 export const bookingRouter = Router()
 const bookingService = new BookingService()
-const baseUrl = '/bookings'
+const roomService = new RoomService()
 
 /**
  * @swagger
@@ -13,7 +15,7 @@ const baseUrl = '/bookings'
  */
 /**
  *  @swagger
- * /bookings :
+ * /api/v1/bookings:
  *   get:
  *     summary: Get all bookings
  *     tags: [Bookings]
@@ -74,14 +76,14 @@ const baseUrl = '/bookings'
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get(baseUrl, (req: Request, res: Response) => {
+bookingRouter.get('/api/v1/bookings', (req: Request, res: Response) => {
     const bookingList = bookingService.fetchAll()
     res.json(bookingList)
 })
 
 /**
  *  @swagger
- * /bookings/:id :
+ * /api/v1/bookings/:id:
  *   get:
  *     summary: Get a booking by Id
  *     tags: [Bookings]
@@ -142,7 +144,7 @@ bookingRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
+bookingRouter.get('/api/v1/bookings/:id', (req: Request, res: Response) => {
     const booking = bookingService.fetchById(parseInt(req.params.id))
     if (booking !== null) {
         res.json(booking)
@@ -153,7 +155,7 @@ bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  *  @swagger
- * /bookings/create :
+ * /api/v1/bookings:
  *   post:
  *     summary: Create a booking
  *     tags: [Bookings]
@@ -214,14 +216,14 @@ bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.post(baseUrl, (req: Request, res: Response) => {
+bookingRouter.post('/api/v1/bookings', (req: Request, res: Response) => {
     const newBooking = bookingService.create(req.body)
     res.status(201).json(newBooking)
 })
 
 /**
  *  @swagger
- * /bookings/:id :
+ * /api/v1/bookings/:id:
  *   put:
  *     summary: Edit a booking
  *     tags: [Bookings]
@@ -282,7 +284,7 @@ bookingRouter.post(baseUrl, (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
+bookingRouter.put('/api/v1/bookings/:id', (req: Request, res: Response) => {
     const updatedBooking = bookingService.update(parseInt(req.params.id), req.body)
     if (updatedBooking !== null) {
         res.status(204).json(updatedBooking)
@@ -293,7 +295,7 @@ bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  *  @swagger
- * /bookings/:id :
+ * /api/v1/bookings/:id :
  *   delete:
  *     summary: Delete a booking
  *     tags: [Bookings]
@@ -354,7 +356,7 @@ bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
+bookingRouter.delete('/api/v1/bookings/:id', (req: Request, res: Response) => {
     const deletedBooking = bookingService.delete(parseInt(req.params.id))
     if (deletedBooking) {
         res.status(204).json({ message: 'Booking deleted' })

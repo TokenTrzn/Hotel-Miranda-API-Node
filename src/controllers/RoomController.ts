@@ -3,7 +3,6 @@ import { RoomService } from "../services/RoomService"
 
 export const roomRouter = Router()
 const roomService = new RoomService()
-const baseUrl = '/rooms'
 /**
  * @swagger
  * tags:
@@ -12,7 +11,7 @@ const baseUrl = '/rooms'
  */
 /**
  * @swagger
- * /rooms :
+ * /api/v1/rooms:
  *   get:
  *     summary: Get all rooms
  *     tags: [Rooms]
@@ -55,14 +54,14 @@ const baseUrl = '/rooms'
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl, (req: Request, res: Response) => {
+roomRouter.get('/api/v1/rooms', (req: Request, res: Response) => {
     const roomList = roomService.fetchAll()
     res.json(roomList)
 })
 
 /**
  * @swagger
- * /rooms/:id :
+ * /api/v1/rooms/:id:
  *   get:
  *     summary: Get a room by Id
  *     tags: [Rooms]
@@ -105,7 +104,7 @@ roomRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
+roomRouter.get('/api/v1/rooms/:id', (req: Request, res: Response) => {
     const room = roomService.fetchById(parseInt(req.params.id))
     if (room !== null) {
         res.json(room)
@@ -116,13 +115,13 @@ roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /rooms/create :
+ * /api/v1/rooms:
  *   post:
  *     summary: Crea una room
  *     tags: [Rooms]
  *     responses:
  *       200:
- *         description: Crea una room
+ *         description: Create a room
  *         content:
  *           application/json:
  *             schema:
@@ -159,14 +158,14 @@ roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.post(baseUrl + '/create', (req: Request, res: Response) => {
+roomRouter.post('/api/v1/rooms', (req: Request, res: Response) => {
     const newRoom = roomService.create(req.body)
     res.status(201).json(newRoom)
 })
 
 /**
  * @swagger
- * /rooms/:id :
+ * /api/v1/rooms/:id:
  *   put:
  *     summary: Edit a room
  *     tags: [Rooms]
@@ -209,7 +208,7 @@ roomRouter.post(baseUrl + '/create', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
+roomRouter.put('/api/v1/rooms/:id', (req: Request, res: Response) => {
     const updatedRoom = roomService.update(parseInt(req.params.id), req.body)
     if (updatedRoom !== null) {
         res.status(204).json(updatedRoom)
@@ -220,7 +219,7 @@ roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /rooms/:id :
+ * /api/v1/rooms/:id :
  *   delete:
  *     summary: Delete a room
  *     tags: [Rooms]
@@ -263,7 +262,7 @@ roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
+roomRouter.delete('/api/v1/rooms/:id', (req: Request, res: Response) => {
     const deletedRoom = roomService.delete(parseInt(req.params.id))
     if (deletedRoom) {
         res.status(204).json({ message: 'Room deleted' })

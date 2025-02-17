@@ -1,12 +1,5 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
-import { AuthInterface } from "../interfaces/AuthInterface";
-
-declare module "express" {
-    interface Request {
-      user?: AuthInterface;
-    }
-  }
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'] || req.query.token
@@ -15,22 +8,11 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
         return res.status(403).json({ message: 'No token provided' })
     }
 
-    const token = process.env.SECRET_TOKEN
-    
-    if (!token) {
-        return res.status(500).json({ message: 'No token provided' })
-    }
-
-    jwt.verify(authHeader, token, (err, decoded) => {
+    jwt.verify(authHeader, process.env.SECRET_TOKEN as string, err => {
         if (err) {
             return res.status(403).json({ message: 'Unauthorized' })
         }
 
-        const user = decoded as AuthInterface
-        if (!user || !user.user) {
-            return res.status(403).json({ message: 'Invalid token' })
-        }
-        req.user = user
         next()
     })
 }

@@ -6,7 +6,7 @@ import { UserInterface } from '../interfaces/UserInterface'
 
 export const loginRouter = Router()
 
-loginRouter.post('', (req: Request, res: Response) => {
+loginRouter.post('/', (req: Request, res: Response) => {
     const { email, password } = req.body
 
     const user: UserInterface[] = users.filter(u => u.email === email)
