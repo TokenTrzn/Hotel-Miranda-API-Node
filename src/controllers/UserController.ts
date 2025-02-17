@@ -62,7 +62,7 @@ userRouter.get('/api/v1/users', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/:id
+ * /api/v1/users/:id:
  *   get:
  *     summary: Get a user by Id
  *     tags: [Users]
@@ -89,20 +89,20 @@ userRouter.get('/api/v1/users', (req: Request, res: Response) => {
  *                     type: string
  *                     example: "alberto@gmail.com "
  *                   startDate:
- *                     type: string
- *                     example: "08/06/2025"
+ *                      type: string
+ *                      example: "08/06/2025"
  *                   description: 
- *                     type: string
- *                     example: "Lorem ipsun"
+ *                      type: string
+ *                      example: "Lorem ipsun"
  *                   contact:
- *                     type: string
- *                     example: "971.927-8764"
+ *                      type: string
+ *                      example: "971.927-8764"
  *                   status:
- *                     type: string
- *                     example: "ACTIVE"
+ *                      type: string
+ *                      example: "ACTIVE"
  *                   password: 
- *                     type: string
- *                     example: "password"
+ *                      type: string
+ *                      example: "password"
  */
 
 userRouter.get('/api/v1/users/:id', (req: Request, res: Response) => {
@@ -116,7 +116,7 @@ userRouter.get('/api/v1/users/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users
+ * /api/v1/users:
  *   post:
  *     summary: Create a user
  *     tags: [Users]
@@ -143,20 +143,20 @@ userRouter.get('/api/v1/users/:id', (req: Request, res: Response) => {
  *                     type: string
  *                     example: "alberto@gmail.com "
  *                   startDate:
- *                     type: string
- *                     example: "08/06/2025"
+ *                      type: string
+ *                      example: "08/06/2025"
  *                   description: 
- *                     type: string
- *                     example: "Lorem ipsun"
+ *                      type: string
+ *                      example: "Lorem ipsun"
  *                   contact:
- *                     type: string
- *                     example: "971.927-8764"
+ *                      type: string
+ *                      example: "971.927-8764"
  *                   status:
- *                     type: string
- *                     example: "ACTIVE"
+ *                      type: string
+ *                      example: "ACTIVE"
  *                   password: 
- *                     type: string
- *                     example: "password"
+ *                      type: string
+ *                      example: "password"
  */
 
 userRouter.post('/api/v1/users', (req: Request, res: Response) => {
@@ -166,7 +166,7 @@ userRouter.post('/api/v1/users', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/:id
+ * /api/v1/users/:id:
  *   put:
  *     summary: Edit a user
  *     tags: [Users]
@@ -193,20 +193,20 @@ userRouter.post('/api/v1/users', (req: Request, res: Response) => {
  *                     type: string
  *                     example: "alberto@gmail.com "
  *                   startDate:
- *                     type: string
- *                     example: "08/06/2025"
+ *                      type: string
+ *                      example: "08/06/2025"
  *                   description: 
- *                     type: string
- *                     example: "Lorem ipsun"
+ *                      type: string
+ *                      example: "Lorem ipsun"
  *                   contact:
- *                     type: string
- *                     example: "971.927-8764"
+ *                      type: string
+ *                      example: "971.927-8764"
  *                   status:
- *                     type: string
- *                     example: "ACTIVE"
+ *                      type: string
+ *                      example: "ACTIVE"
  *                   password: 
- *                     type: string
- *                     example: "password"
+ *                      type: string
+ *                      example: "password"
  */
 
 userRouter.put('/api/v1/users/:id', (req: Request, res: Response) => {
@@ -220,7 +220,7 @@ userRouter.put('/api/v1/users/:id', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/users/:id
+ * /api/v1/users/:id:
  *   delete:
  *     summary: Delete a user
  *     tags: [Users]
@@ -247,20 +247,20 @@ userRouter.put('/api/v1/users/:id', (req: Request, res: Response) => {
  *                     type: string
  *                     example: "alberto@gmail.com "
  *                   startDate:
- *                     type: string
- *                     example: "08/06/2025"
+ *                      type: string
+ *                      example: "08/06/2025"
  *                   description: 
- *                     type: string
- *                     example: "Lorem ipsun"
+ *                      type: string
+ *                      example: "Lorem ipsun"
  *                   contact:
- *                     type: string
- *                     example: "971.927-8764"
+ *                      type: string
+ *                      example: "971.927-8764"
  *                   status:
- *                     type: string
- *                     example: "ACTIVE"
+ *                      type: string
+ *                      example: "ACTIVE"
  *                   password: 
- *                     type: string
- *                     example: "password"
+ *                      type: string
+ *                      example: "password"
  */
 
 userRouter.delete('/api/v1/users/:id', (req: Request, res: Response) => {
