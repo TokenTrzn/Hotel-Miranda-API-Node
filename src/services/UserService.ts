@@ -1,43 +1,44 @@
 import { UserInterface } from "../interfaces/UserInterface";
 import usersData from '../data/usersData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
+import { UserModel } from "../models/UserSchema";
 
 
 export class UserService implements ServiceInterface<UserInterface> {
     private users: UserInterface[] = usersData as UserInterface[]
 
-    fetchAll(): UserInterface[] {
-        return this.users
+    async fetchAll(): Promise<UserInterface[]> {
+        try {
+            const users: UserInterface[] = await UserModel.find()
+            return users
+        } catch (error) {
+            throw error
+        }
     }
 
-    fetchById(id: number): UserInterface | undefined {
-        return this.users.find((user) => user.id === id)
+    async fetchById(id: number): Promise<UserInterface> {
+        try {
+            const user: UserInterface | null = await UserModel.findById(id)
+            if (!user) {
+                throw new Error('User Not Found')
+            }
+            return user
+        } catch (error) {
+            throw error
+        }
     }
 
-    create(User: UserInterface): UserInterface {
-        const newUser = { ...User, id: this.users.length + 1 }
-        this.users.push(newUser)
+    async create(user: UserInterface): Promise<UserInterface> {
+        const newUser = new UserModel(user)
+        await newUser.save()
         return newUser
     }
 
-    update(id: number, User: UserInterface): UserInterface | null {
-        const userToUpdate = this.users.filter((user) => user.id === id)
-        if (userToUpdate.length > 0) {
-            const updateUser = { ...userToUpdate[0], ...User }
-            const result = this.users.filter((user) => user.id !== id)
-            result.push(updateUser)
-            this.users = result
-            return updateUser
-        }
-        return null
+    update(id: number, user: UserInterface): Promise<UserInterface | null> {
+        return Promise.resolve(null)
     }
 
-    delete(id: number): boolean {
-        const UserToDelete = this.users.filter((user) => user.id === id)
-        if (UserToDelete.length > 0) {
-            this.users = this.users.filter((user) => user.id !== id)
-            return true
-        }
-        return false
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false)
     }
 }
