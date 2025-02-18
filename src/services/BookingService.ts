@@ -1,43 +1,44 @@
 import { BookingInterface } from "../interfaces/BookingInterface";
 import bookingsData from '../data/bookingsData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
+import { BookingModel } from "../models/BookingSchema";
 
 
 export class BookingService implements ServiceInterface<BookingInterface> {
     private bookings: BookingInterface[] = bookingsData as BookingInterface[]
 
-    fetchAll(): BookingInterface[] {
-        return this.bookings
+    async fetchAll(): Promise<BookingInterface[]> {
+        try {
+            const bookings: BookingInterface[] = await BookingModel.find()
+            return bookings
+        } catch (error) {
+            throw error
+        }
     }
 
-    fetchById(id: number): BookingInterface | undefined {
-        return this. bookings.find((booking) => booking.id === id)
+    async fetchById(id: number): Promise<BookingInterface> {
+        try {
+            const booking: BookingInterface | null = await BookingModel.findById(id)
+            if (!booking) {
+                throw new Error('Booking Not Found')
+            }
+            return booking
+        } catch (error) {
+            throw error
+        }
     }
 
-    create(booking: BookingInterface): BookingInterface {
-        const newBooking = { ...booking, id: this.bookings.length + 1 }
-        this.bookings.push(newBooking)
+    async create(booking: BookingInterface): Promise<BookingInterface> {
+        const newBooking = new BookingModel(booking)
+        await newBooking.save()
         return newBooking
     }
 
-    update(id: number, booking: BookingInterface): BookingInterface | null {
-        const bookingToUpdate = this.bookings.filter((booking) => booking.id === id)
-        if (bookingToUpdate.length > 0) {
-            const updateBooking = { ...bookingToUpdate[0], ...booking }
-            const result = this.bookings.filter((booking) => booking.id === id)
-            result.push(updateBooking)
-            this.bookings = result
-            return updateBooking
-        }
-        return null
+    update(id: number, booking: BookingInterface): Promise<BookingInterface | null> {
+        return Promise.resolve(null)
     }
 
-    delete(id: number): boolean {
-        const bookingToDelete = this.bookings.filter((booking) => booking.id === id)
-        if (bookingToDelete.length > 0) {
-            this.bookings = this.bookings.filter((booking) => booking.id !== id)
-            return true
-        }
-        return false
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false)
     }
 }
