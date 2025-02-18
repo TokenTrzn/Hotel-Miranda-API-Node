@@ -6,6 +6,7 @@ import { roomRouter } from './controllers/RoomController'
 import { bookingRouter } from './controllers/BookingController'
 import { contactRouter } from './controllers/ContactController'
 import { userRouter } from './controllers/UserController'
+import { connectDB } from './utils/database'
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -19,20 +20,20 @@ app.use(express.json())
 
 
 const swaggerOptions = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-          title: 'Documentación de mi API',
-          version: '1.0.0',
-          description: 'Descripción de mi API',
-        },
-        servers: [
-          {
-            url: 'http://localhost:3000',
-          },
-        ]
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Documentación de mi API',
+      version: '1.0.0',
+      description: 'Descripción de mi API',
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000',
       },
-      apis: ['./src/controllers/*.ts']
+    ]
+  },
+  apis: ['./src/controllers/*.ts']
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
@@ -46,9 +47,14 @@ app.use(userRouter)
 app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
 app.get('/live', (req: Request, res: Response) => {
-    res.send(`${new Date().toISOString()}`)
+  res.send(`${new Date().toISOString()}`)
 })
 
-app.listen(port, () => {
+const runServer = async () => {
+  await connectDB()
+  app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
-})
+  })
+}
+
+runServer()
