@@ -1,43 +1,44 @@
 import { RoomInterface } from "../interfaces/RoomInterface";
 import roomsData from '../data/roomsData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
+import { RoomModel } from "../models/RoomSchema";
 
 
 export class RoomService implements ServiceInterface<RoomInterface> {
     private rooms: RoomInterface[] = roomsData as RoomInterface[]
 
-    fetchAll(): RoomInterface[] {
-        return this.rooms
+    async fetchAll(): Promise<RoomInterface[]> {
+        try {
+            const rooms: RoomInterface[] = await RoomModel.find()
+            return rooms
+        } catch (error) {
+            throw error
+        }
     }
 
-    fetchById(id: number): RoomInterface | undefined {
-        return this.rooms.find((room) => room.id === id)
+    async fetchById(id: number): Promise<RoomInterface> {
+        try {
+            const room: RoomInterface | null = await RoomModel.findById(id)
+            if (!room) {
+                throw new Error('Room Not Found')
+            }
+            return room
+        } catch (error) {
+            throw error
+        }
     }
 
-    create(room: RoomInterface): RoomInterface {
-        const newRoom = { ...room, id: this.rooms.length + 1 }
-        this.rooms.push(newRoom)
+    async create(room: RoomInterface): Promise<RoomInterface> {
+        const newRoom = new RoomModel(room)
+        await newRoom.save()
         return newRoom
     }
 
-    update(id: number, room: RoomInterface): RoomInterface | null {
-        const roomToUpdate = this.rooms.filter((room) => room.id === id)
-        if (roomToUpdate.length > 0) {
-            const updateRoom = { ...roomToUpdate[0], ...room }
-            const result = this.rooms.filter((room) => room.id !== id)
-            result.push(updateRoom)
-            this.rooms = result
-            return updateRoom
-        }
-        return null
+    update(id: number, room: RoomInterface): Promise<RoomInterface | null> {
+        return Promise.resolve(null)
     }
 
-    delete(id: number): boolean {
-        const roomToDelete = this.rooms.filter((room) => room.id === id)
-        if (roomToDelete.length > 0) {
-            this.rooms = this.rooms.filter((room) => room.id !== id)
-            return true
-        }
-        return false
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false)
     }
 }
