@@ -5,8 +5,6 @@ import { BookingModel } from "../models/BookingSchema";
 
 
 export class BookingService implements ServiceInterface<BookingInterface> {
-    private bookings: BookingInterface[] = bookingsData as BookingInterface[]
-
     async fetchAll(): Promise<BookingInterface[]> {
         try {
             const bookings: BookingInterface[] = await BookingModel.find()

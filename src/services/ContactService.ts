@@ -1,43 +1,42 @@
 import { ContactInterface } from "../interfaces/ContactInterface";
 import contactsData from '../data/contactsData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
+import { ContactModel } from "../models/ContactSchema";
 
 
 export class ContactService implements ServiceInterface<ContactInterface> {
-    private contacts: ContactInterface[] = contactsData as ContactInterface[]
-
-    fetchAll(): ContactInterface[] {
-        return this.contacts
+    async fetchAll(): Promise<ContactInterface[]> {
+        try {
+            const contacts: ContactInterface[] = await ContactModel.find()
+            return contacts
+        } catch (error) {
+            throw error
+        }
     }
 
-    fetchById(id: number): ContactInterface | undefined {
-        return this.contacts.find((contact) => contact.id === id)
+    async fetchById(id: number): Promise<ContactInterface> {
+        try {
+            const contact: ContactInterface | null = await ContactModel.findById(id)
+            if (!contact) {
+                throw new Error('Contact Not Found')
+            }
+            return contact
+        } catch (error) {
+            throw error
+        }
     }
 
-    create(contact: ContactInterface): ContactInterface {  
-        const newContact = { ...contact, id: this.contacts.length + 1 }
-        this.contacts.push(newContact)
+    async create(contact: ContactInterface): Promise<ContactInterface> {
+        const newContact = new ContactModel(contact)
+        await newContact.save()
         return newContact
     }
 
-    update(id: number, contact: ContactInterface): ContactInterface | null {
-        const contactToUpdate = this.contacts.filter((contact) => contact.id === id)
-        if (contactToUpdate.length > 0) {
-            const updateContact = { ...contactToUpdate[0], ...contact }
-            const result = this.contacts.filter((contact) => contact.id !== id)
-            result.push(updateContact)
-            this.contacts = result
-            return updateContact
-        }
-        return null
+    update(id: number, contact: ContactInterface): Promise<ContactInterface | null> {
+        return Promise.resolve(null)
     }
 
-    delete(id: number): boolean {
-        const contactToDelete = this.contacts.filter((contact) => contact.id === id)
-        if (contactToDelete.length > 0) {
-            this.contacts = this.contacts.filter((contact) => contact.id === id)
-            return true
-        }
-        return false
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false)
     }
 }

@@ -5,8 +5,6 @@ import { UserModel } from "../models/UserSchema";
 
 
 export class UserService implements ServiceInterface<UserInterface> {
-    private users: UserInterface[] = usersData as UserInterface[]
-
     async fetchAll(): Promise<UserInterface[]> {
         try {
             const users: UserInterface[] = await UserModel.find()

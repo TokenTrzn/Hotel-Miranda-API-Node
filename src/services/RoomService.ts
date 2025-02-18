@@ -5,8 +5,6 @@ import { RoomModel } from "../models/RoomSchema";
 
 
 export class RoomService implements ServiceInterface<RoomInterface> {
-    private rooms: RoomInterface[] = roomsData as RoomInterface[]
-
     async fetchAll(): Promise<RoomInterface[]> {
         try {
             const rooms: RoomInterface[] = await RoomModel.find()
