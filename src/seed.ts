@@ -148,3 +148,5 @@ async function main() {
         await generateUsers()
     }
 }
+
+main()
