@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker'
-import { connectDB } from './utils/database'
-import { BookingModel } from './models/BookingSchema'
-import { ContactModel } from './models/ContactSchema'
-import { RoomModel } from './models/RoomSchema'
-import { UserModel } from './models/UserSchema'
+import { connectDB } from './src/utils/database'
+import { BookingModel } from './src/models/BookingSchema'
+import { ContactModel } from './src/models/ContactSchema'
+import { RoomModel } from './src/models/RoomSchema'
+import { UserModel } from './src/models/UserSchema'
+import 'dotenv/config'
 
 async function main() {
     await connectDB()
@@ -29,7 +30,7 @@ async function main() {
             isArchived
         })
 
-        await contact.save()        
+        console.log(await contact.save())   
     }
 
     async function generateBookings() {
@@ -123,7 +124,7 @@ async function main() {
         const startDate = faker.date.anytime()
         const description = faker.person.jobTitle()
         const contact = faker.phone.number()
-        const state = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE'])
+        const status = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE'])
         const password = faker.internet.password()
 
         const user = new UserModel({
@@ -134,7 +135,7 @@ async function main() {
             startDate,
             description,
             contact,
-            state,
+            status,
             password
         })
 
