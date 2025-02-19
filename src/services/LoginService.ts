@@ -1,26 +1,33 @@
-import { AuthInterface } from "../interfaces/AuthInterface";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import authData from '../data/authData.json'
+import users from '../data/usersData.json'
+import { UserInterface } from "../interfaces/UserInterface";
 
 export class LoginService {
-
     static async login(email: string, password: string): Promise<string | null> {
-        const user: AuthInterface[] = authData.filter(u => u.user === email)
-        if (user.length === 0) {
-            return null
-        }
+        try {
+            const user: UserInterface | undefined = users.find(u => u.email === email)
+            if (!user) {
+                return null
+            }
 
-        const validPassword = await bcrypt.compare(password, user[0].password)
-        if (!validPassword) {
-            return null
-        }
+            const validPassword = await bcrypt.compare(password, user.password)
+            if (!validPassword) {
+                return null
+            }
 
-        const token = jwt.sign(
-            { email: user[0].user }, 
-            process.env.SECRET_TOKEN as string, 
-            { expiresIn: '1h' }
-        )
-        return token
+            if (!process.env.SECRET_TOKEN) {
+                throw new Error('SECRET_TOKEN is not provided')
+            }
+
+            const token = jwt.sign(
+                { email: user.email },
+                process.env.SECRET_TOKEN as string,
+                { expiresIn: '1h' }
+            )
+            return token
+        } catch (error) {
+            throw error
+        }
     }
 }
