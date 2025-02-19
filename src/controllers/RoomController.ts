@@ -55,8 +55,8 @@ const baseUrl = '/rooms'
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl, (req: Request, res: Response) => {
-    const roomList = roomService.fetchAll()
+roomRouter.get(baseUrl, async (req: Request, res: Response) => {
+    const roomList = await roomService.fetchAll()
     res.json(roomList)
 })
 
@@ -105,8 +105,8 @@ roomRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
-    const room = roomService.fetchById(parseInt(req.params.id))
+roomRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const room = await roomService.fetchById(parseInt(req.params.id))
     if (room !== null) {
         res.json(room)
     } else {
@@ -159,8 +159,8 @@ roomRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.post(baseUrl + '/create', (req: Request, res: Response) => {
-    const newRoom = roomService.create(req.body)
+roomRouter.post(baseUrl + '/create', async (req: Request, res: Response) => {
+    const newRoom = await roomService.create(req.body)
     res.status(201).json(newRoom)
 })
 
@@ -209,8 +209,8 @@ roomRouter.post(baseUrl + '/create', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
-    const updatedRoom = roomService.update(parseInt(req.params.id), req.body)
+roomRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const updatedRoom = await roomService.update(parseInt(req.params.id), req.body)
     if (updatedRoom !== null) {
         res.status(204).json(updatedRoom)
     } else {
@@ -263,8 +263,8 @@ roomRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
-    const deletedRoom = roomService.delete(parseInt(req.params.id))
+roomRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const deletedRoom = await roomService.delete(parseInt(req.params.id))
     if (deletedRoom) {
         res.status(204).json({ message: 'Room deleted' })
     } else {

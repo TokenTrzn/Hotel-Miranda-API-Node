@@ -74,8 +74,8 @@ const baseUrl = '/bookings'
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get(baseUrl, (req: Request, res: Response) => {
-    const bookingList = bookingService.fetchAll()
+bookingRouter.get(baseUrl, async (req: Request, res: Response) => {
+    const bookingList = await bookingService.fetchAll()
     res.json(bookingList)
 })
 
@@ -142,8 +142,8 @@ bookingRouter.get(baseUrl, (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
-    const booking = bookingService.fetchById(parseInt(req.params.id))
+bookingRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const booking = await bookingService.fetchById(parseInt(req.params.id))
     if (booking !== null) {
         res.json(booking)
     } else {
@@ -214,8 +214,8 @@ bookingRouter.get(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.post(baseUrl, (req: Request, res: Response) => {
-    const newBooking = bookingService.create(req.body)
+bookingRouter.post(baseUrl, async (req: Request, res: Response) => {
+    const newBooking = await bookingService.create(req.body)
     res.status(201).json(newBooking)
 })
 
@@ -282,8 +282,8 @@ bookingRouter.post(baseUrl, (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
-    const updatedBooking = bookingService.update(parseInt(req.params.id), req.body)
+bookingRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const updatedBooking = await bookingService.update(parseInt(req.params.id), req.body)
     if (updatedBooking !== null) {
         res.status(204).json(updatedBooking)
     } else {
@@ -354,8 +354,8 @@ bookingRouter.put(baseUrl + '/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.delete(baseUrl + '/:id', (req: Request, res: Response) => {
-    const deletedBooking = bookingService.delete(parseInt(req.params.id))
+bookingRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const deletedBooking = await bookingService.delete(parseInt(req.params.id))
     if (deletedBooking) {
         res.status(204).json({ message: 'Booking deleted' })
     } else {
