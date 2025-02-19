@@ -5,9 +5,11 @@ import { ContactModel } from './src/models/ContactSchema'
 import { RoomModel } from './src/models/RoomSchema'
 import { UserModel } from './src/models/UserSchema'
 import 'dotenv/config'
+import mongoose from 'mongoose'
 
 async function main() {
     await connectDB()
+    await mongoose.connection.dropDatabase()
 
     async function generateContacts() {
         const id = faker.number.int()
