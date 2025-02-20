@@ -9,7 +9,7 @@ declare module "express" {
   }
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers['authorization'] || req.query.token
+    const authHeader = req.headers['authorization'] || req.query.accessToken
 
     if (!authHeader || typeof authHeader !== 'string') {
         return res.status(403).json({ message: 'No token provided' })
