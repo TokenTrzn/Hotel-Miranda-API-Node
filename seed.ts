@@ -6,6 +6,7 @@ import { RoomModel } from './src/models/RoomSchema'
 import { UserModel } from './src/models/UserSchema'
 import 'dotenv/config'
 import mongoose from 'mongoose'
+import { hashPassword } from './src/utils/hashPassword'
 
 async function main() {
     await connectDB()
@@ -127,7 +128,7 @@ async function main() {
         const description = faker.person.jobTitle()
         const contact = faker.phone.number()
         const status = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE'])
-        const password = faker.internet.password()
+        const password = await hashPassword(faker.internet.password())
 
         const user = new UserModel({
             id,
