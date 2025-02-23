@@ -1,5 +1,4 @@
 import { RoomInterface } from "../interfaces/RoomInterface";
-import roomsData from '../data/roomsData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
 import { RoomModel } from "../models/RoomSchema";
 
@@ -32,11 +31,33 @@ export class RoomService implements ServiceInterface<RoomInterface> {
         return newRoom
     }
 
-    update(id: number, room: RoomInterface): Promise<RoomInterface | null> {
-        return Promise.resolve(null)
+    async update(id: number, room: RoomInterface): Promise<RoomInterface | null> {
+        try {
+            const roomToUpdate: RoomInterface | null = await RoomModel.findById(id)
+            if (roomToUpdate === null) {
+                throw new Error('Room Not Found')
+            }
+            const roomObj = roomToUpdate.toObject()
+            const updatedRoom = { ...roomObj, ...room }
+            await RoomModel.findByIdAndUpdate(id, updatedRoom)
+
+            return updatedRoom
+        } catch (error) {
+            throw error
+        }
     }
 
-    delete(id: number): Promise<boolean> {
-        return Promise.resolve(false)
+    async delete(id: number): Promise<boolean> {
+        try {
+            const roomToDelete = await RoomModel.findById(id)
+            if (roomToDelete === null) {
+                throw new Error('Room Not Found')
+            }
+            await RoomModel.findByIdAndDelete(id)
+            
+            return true
+        } catch (error) {
+            throw error
+        }
     }
 }

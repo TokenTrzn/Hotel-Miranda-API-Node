@@ -1,3 +1,5 @@
+import { RoomInterface } from "./RoomInterface";
+
 export interface BookingInterface {
     id: number;
     guestName: string;
@@ -14,4 +16,5 @@ export interface BookingInterface {
     price: string;
     description: string;
     amenities: string[];
+    rooms: RoomInterface[]
 }

@@ -11,13 +11,13 @@ declare module "express" {
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'] || req.query.accessToken
 
-    if (!authHeader || typeof authHeader !== 'string') {
+    if (authHeader === undefined || typeof authHeader !== 'string') {
         return res.status(403).json({ message: 'No token provided' })
     }
 
     const token = process.env.SECRET_TOKEN
     
-    if (!token) {
+    if (token === undefined) {
         return res.status(500).json({ message: 'No token provided' })
     }
 

@@ -38,7 +38,13 @@ const RoomSchema = new mongoose.Schema<RoomInterface>({
         type: String,
         required: true,
         enum: ['Booked', 'Available']
-    }
+    },
+    bookings: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ]
 })
 
 export const RoomModel = mongoose.model<RoomInterface>('Room', RoomSchema)

@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { BookingInterface } from "../interfaces/BookingInterface";
+import { RoomInterface } from "../interfaces/RoomInterface";
+import { RoomModel } from "./RoomSchema";
 
 
 const BookingSchema = new mongoose.Schema<BookingInterface>({
@@ -64,6 +66,12 @@ const BookingSchema = new mongoose.Schema<BookingInterface>({
         type: [String],
         required: true
     },
+    rooms: [
+        {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Room'
+        }
+    ]
 })
 
 export const BookingModel = mongoose.model<BookingInterface>('Booking', BookingSchema)

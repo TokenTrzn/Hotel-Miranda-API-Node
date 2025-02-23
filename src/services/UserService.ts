@@ -1,5 +1,4 @@
 import { UserInterface } from "../interfaces/UserInterface";
-import usersData from '../data/usersData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
 import { UserModel } from "../models/UserSchema";
 
@@ -32,11 +31,32 @@ export class UserService implements ServiceInterface<UserInterface> {
         return newUser
     }
 
-    update(id: number, user: UserInterface): Promise<UserInterface | null> {
-        return Promise.resolve(null)
+    async update(id: number, user: UserInterface): Promise<UserInterface | null> {
+        try {
+            const userToUpdate: UserInterface | null = await UserModel.findById(id)
+            if (userToUpdate === null) {
+                throw new Error('User Not Found')
+            }
+            const userObj = userToUpdate.toObject()
+            const updatedUser = { ...userObj, ...user }
+            await UserModel.findByIdAndUpdate(id, updatedUser)
+
+            return updatedUser
+        } catch (error) {
+            throw error
+        }
     }
 
-    delete(id: number): Promise<boolean> {
-        return Promise.resolve(false)
+    async delete(id: number): Promise<boolean> {
+        try {
+            const userToDelete = await UserModel.findById(id)
+            if (userToDelete === null) {
+                throw new Error('User Not Found')
+            }
+            await UserModel.findByIdAndDelete(id)
+            return true
+        } catch (error) {
+            throw error
+        }
     }
 }

@@ -1,5 +1,4 @@
 import { ContactInterface } from "../interfaces/ContactInterface";
-import contactsData from '../data/contactsData.json'
 import { ServiceInterface } from "../interfaces/ServiceInterface";
 import { ContactModel } from "../models/ContactSchema";
 
@@ -32,11 +31,32 @@ export class ContactService implements ServiceInterface<ContactInterface> {
         return newContact
     }
 
-    update(id: number, contact: ContactInterface): Promise<ContactInterface | null> {
-        return Promise.resolve(null)
+    async update(id: number, contact: ContactInterface): Promise<ContactInterface | null> {
+        try {
+            const contactToUpdate: ContactInterface | null = await ContactModel.findById(id)
+            if (contactToUpdate === null) {
+                throw new Error('Contact Not Found')
+            }
+            const contactObj = contactToUpdate.toObject()
+            const updatedContact = { ...contactObj, ...contact }
+            await ContactModel.findByIdAndUpdate(id, updatedContact)
+
+            return updatedContact
+        } catch (error) {
+            throw error
+        }
     }
 
-    delete(id: number): Promise<boolean> {
-        return Promise.resolve(false)
+    async delete(id: number): Promise<boolean> {
+        try {
+            const contactToDelete = await ContactModel.findById(id)
+            if (contactToDelete === null) {
+                throw new Error('Contact Not Found')
+            }
+            await ContactModel.findByIdAndDelete(id)
+            return true
+        } catch (error) {
+            throw error
+        }
     }
 }

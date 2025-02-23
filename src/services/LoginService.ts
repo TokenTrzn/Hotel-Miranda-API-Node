@@ -7,7 +7,7 @@ export class LoginService {
     static async login(email: string, password: string): Promise<string | null> {
         try {
             const user: UserInterface | undefined = users.find(u => u.email === email)
-            if (!user) {
+            if (user === undefined) {
                 return null
             }
 
