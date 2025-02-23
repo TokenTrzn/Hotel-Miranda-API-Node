@@ -34,13 +34,13 @@ export class BookingService implements ServiceInterface<BookingInterface> {
 
     async update(id: number, booking: BookingInterface): Promise<BookingInterface | null> {
         try {
-            const bookingToUpdate: BookingInterface | null = await BookingModel.findById(id)
-            if (bookingToUpdate === null) {
-                throw new Error('Booking Not Found')
+            const updatedBooking: BookingInterface | null = await BookingModel.findByIdAndUpdate(
+                { id: id },
+                booking
+            )
+            if (updatedBooking === null) {
+                return null
             }
-            const bookingObj = bookingToUpdate.toObject()
-            const updatedBooking = { ...bookingObj, ...booking }
-            await BookingModel.findByIdAndUpdate(id, updatedBooking)
 
             return updatedBooking
         } catch (error) {
@@ -50,11 +50,11 @@ export class BookingService implements ServiceInterface<BookingInterface> {
 
     async delete(id: number): Promise<boolean> {
         try {
-            const bookingToDelete = await BookingModel.findById(id)
-            if (bookingToDelete === null) {
+            const deletedBooking = await BookingModel.findByIdAndDelete(id)
+            if (deletedBooking === null) {
                 throw new Error('Booking Not Found')
             }
-            await BookingModel.findByIdAndDelete(id)
+
             return true
         } catch (error) {
             throw error

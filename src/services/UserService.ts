@@ -33,13 +33,13 @@ export class UserService implements ServiceInterface<UserInterface> {
 
     async update(id: number, user: UserInterface): Promise<UserInterface | null> {
         try {
-            const userToUpdate: UserInterface | null = await UserModel.findById(id)
-            if (userToUpdate === null) {
-                throw new Error('User Not Found')
+            const updatedUser: UserInterface | null = await UserModel.findByIdAndUpdate(
+                { id: id },
+                user
+            )
+            if (updatedUser === null) {
+                return null
             }
-            const userObj = userToUpdate.toObject()
-            const updatedUser = { ...userObj, ...user }
-            await UserModel.findByIdAndUpdate(id, updatedUser)
 
             return updatedUser
         } catch (error) {
@@ -49,11 +49,11 @@ export class UserService implements ServiceInterface<UserInterface> {
 
     async delete(id: number): Promise<boolean> {
         try {
-            const userToDelete = await UserModel.findById(id)
-            if (userToDelete === null) {
+            const deletedUser = await UserModel.findByIdAndDelete(id)
+            if (deletedUser === null) {
                 throw new Error('User Not Found')
             }
-            await UserModel.findByIdAndDelete(id)
+
             return true
         } catch (error) {
             throw error

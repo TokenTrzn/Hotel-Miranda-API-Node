@@ -33,13 +33,13 @@ export class RoomService implements ServiceInterface<RoomInterface> {
 
     async update(id: number, room: RoomInterface): Promise<RoomInterface | null> {
         try {
-            const roomToUpdate: RoomInterface | null = await RoomModel.findById(id)
-            if (roomToUpdate === null) {
-                throw new Error('Room Not Found')
+            const updatedRoom: RoomInterface | null = await RoomModel.findByIdAndUpdate(
+                { id: id },
+                room
+            )
+            if (updatedRoom === null) {
+                return null
             }
-            const roomObj = roomToUpdate.toObject()
-            const updatedRoom = { ...roomObj, ...room }
-            await RoomModel.findByIdAndUpdate(id, updatedRoom)
 
             return updatedRoom
         } catch (error) {
@@ -49,11 +49,10 @@ export class RoomService implements ServiceInterface<RoomInterface> {
 
     async delete(id: number): Promise<boolean> {
         try {
-            const roomToDelete = await RoomModel.findById(id)
-            if (roomToDelete === null) {
+            const deletedRoom = await RoomModel.findByIdAndDelete(id)
+            if (deletedRoom === null) {
                 throw new Error('Room Not Found')
             }
-            await RoomModel.findByIdAndDelete(id)
             
             return true
         } catch (error) {

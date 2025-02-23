@@ -33,13 +33,13 @@ export class ContactService implements ServiceInterface<ContactInterface> {
 
     async update(id: number, contact: ContactInterface): Promise<ContactInterface | null> {
         try {
-            const contactToUpdate: ContactInterface | null = await ContactModel.findById(id)
-            if (contactToUpdate === null) {
-                throw new Error('Contact Not Found')
+            const updatedContact: ContactInterface | null = await ContactModel.findByIdAndUpdate(
+                { id: id },
+                contact
+            )
+            if (updatedContact === null) {
+                return null
             }
-            const contactObj = contactToUpdate.toObject()
-            const updatedContact = { ...contactObj, ...contact }
-            await ContactModel.findByIdAndUpdate(id, updatedContact)
 
             return updatedContact
         } catch (error) {
@@ -49,11 +49,11 @@ export class ContactService implements ServiceInterface<ContactInterface> {
 
     async delete(id: number): Promise<boolean> {
         try {
-            const contactToDelete = await ContactModel.findById(id)
-            if (contactToDelete === null) {
+            const deletedContact = await ContactModel.findByIdAndDelete(id)
+            if (deletedContact === null) {
                 throw new Error('Contact Not Found')
             }
-            await ContactModel.findByIdAndDelete(id)
+
             return true
         } catch (error) {
             throw error
