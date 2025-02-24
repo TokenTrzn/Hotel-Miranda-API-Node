@@ -13,7 +13,7 @@ export class ContactService implements ServiceInterface<ContactInterface> {
         }
     }
 
-    async fetchById(id: number): Promise<ContactInterface> {
+    async fetchById(id: string): Promise<ContactInterface> {
         try {
             const contact: ContactInterface | null = await ContactModel.findById(id)
             if (!contact) {
@@ -31,7 +31,7 @@ export class ContactService implements ServiceInterface<ContactInterface> {
         return newContact
     }
 
-    async update(id: number, contact: ContactInterface): Promise<ContactInterface | null> {
+    async update(id: string, contact: ContactInterface): Promise<ContactInterface | null> {
         try {
             const updatedContact: ContactInterface | null = await ContactModel.findByIdAndUpdate(
                 { id: id },
@@ -47,7 +47,7 @@ export class ContactService implements ServiceInterface<ContactInterface> {
         }
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: string): Promise<boolean> {
         try {
             const deletedContact = await ContactModel.findByIdAndDelete(id)
             if (deletedContact === null) {

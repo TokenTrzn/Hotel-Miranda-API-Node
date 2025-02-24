@@ -13,7 +13,7 @@ export class RoomService implements ServiceInterface<RoomInterface> {
         }
     }
 
-    async fetchById(id: number): Promise<RoomInterface> {
+    async fetchById(id: string): Promise<RoomInterface> {
         try {
             const room: RoomInterface | null = await RoomModel.findById(id)
             if (!room) {
@@ -31,7 +31,7 @@ export class RoomService implements ServiceInterface<RoomInterface> {
         return newRoom
     }
 
-    async update(id: number, room: RoomInterface): Promise<RoomInterface | null> {
+    async update(id: string, room: RoomInterface): Promise<RoomInterface | null> {
         try {
             const updatedRoom: RoomInterface | null = await RoomModel.findByIdAndUpdate(
                 { id: id },
@@ -47,7 +47,7 @@ export class RoomService implements ServiceInterface<RoomInterface> {
         }
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: string): Promise<boolean> {
         try {
             const deletedRoom = await RoomModel.findByIdAndDelete(id)
             if (deletedRoom === null) {

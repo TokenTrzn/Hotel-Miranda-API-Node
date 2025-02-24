@@ -13,7 +13,7 @@ export class UserService implements ServiceInterface<UserInterface> {
         }
     }
 
-    async fetchById(id: number): Promise<UserInterface> {
+    async fetchById(id: string): Promise<UserInterface> {
         try {
             const user: UserInterface | null = await UserModel.findById(id)
             if (!user) {
@@ -31,7 +31,7 @@ export class UserService implements ServiceInterface<UserInterface> {
         return newUser
     }
 
-    async update(id: number, user: UserInterface): Promise<UserInterface | null> {
+    async update(id: string, user: UserInterface): Promise<UserInterface | null> {
         try {
             const updatedUser: UserInterface | null = await UserModel.findByIdAndUpdate(
                 { id: id },
@@ -47,7 +47,7 @@ export class UserService implements ServiceInterface<UserInterface> {
         }
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: string): Promise<boolean> {
         try {
             const deletedUser = await UserModel.findByIdAndDelete(id)
             if (deletedUser === null) {

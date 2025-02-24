@@ -14,10 +14,10 @@ export class BookingService implements ServiceInterface<BookingInterface> {
         }
     }
 
-    async fetchById(id: number): Promise<BookingInterface> {
+    async fetchById(id: string): Promise<BookingInterface> {
         try {
             const booking: BookingInterface | null = await BookingModel.findById(id)
-            if (!booking) {
+            if (booking === null) {
                 throw new Error('Booking Not Found')
             }
             return booking
@@ -32,7 +32,7 @@ export class BookingService implements ServiceInterface<BookingInterface> {
         return newBooking
     }
 
-    async update(id: number, booking: BookingInterface): Promise<BookingInterface | null> {
+    async update(id: string, booking: BookingInterface): Promise<BookingInterface | null> {
         try {
             const updatedBooking: BookingInterface | null = await BookingModel.findByIdAndUpdate(
                 { id: id },
@@ -48,7 +48,7 @@ export class BookingService implements ServiceInterface<BookingInterface> {
         }
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: string): Promise<boolean> {
         try {
             const deletedBooking = await BookingModel.findByIdAndDelete(id)
             if (deletedBooking === null) {

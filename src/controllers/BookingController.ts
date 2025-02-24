@@ -143,7 +143,7 @@ bookingRouter.get(baseUrl, async (req: Request, res: Response) => {
  */
 
 bookingRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const booking = await bookingService.fetchById(parseInt(req.params.id))
+    const booking = await bookingService.fetchById(req.params.id)
     if (booking !== null) {
         res.json(booking)
     } else {
@@ -283,7 +283,7 @@ bookingRouter.post(baseUrl, async (req: Request, res: Response) => {
  */
 
 bookingRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedBooking = await bookingService.update(parseInt(req.params.id), req.body)
+    const updatedBooking = await bookingService.update(req.params.id, req.body)
     if (updatedBooking !== null) {
         res.status(204).json(updatedBooking)
     } else {
@@ -355,7 +355,7 @@ bookingRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 bookingRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedBooking = await bookingService.delete(parseInt(req.params.id))
+    const deletedBooking = await bookingService.delete(req.params.id)
     if (deletedBooking) {
         res.status(204).json({ message: 'Booking deleted' })
     } else {
