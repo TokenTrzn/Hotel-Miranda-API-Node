@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import dotenv from 'dotenv'
 import { loginRouter } from './controllers/LoginController'
 import { authenticate } from './middleware/auth'
@@ -13,11 +13,19 @@ const swaggerJsDoc = require('swagger-jsdoc')
 
 dotenv.config()
 
+const cors = require('cors')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3002
 
 app.use(express.json())
 
+app.use(cors())
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.method === 'OPTIONS')
+    res.status(200).end()
+  next()
+})
 
 const swaggerOptions = {
   definition: {
@@ -29,7 +37,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: `http://localhost:${port}`,
       },
     ]
   },
