@@ -2,11 +2,8 @@ import { Response, Request } from "express"
 import { BookingInterface } from "../interfaces/BookingInterface"
 
 export const validateContact = (req: Request, res: Response) => {
-    const { id, guestName, orderDate, orderDateHour, checkIn, checkInHour, checkOut, checkOutHour, specialRequest, type, number, status, price, description, amenities, rooms } = req.body as BookingInterface
+    const { guestName, orderDate, orderDateHour, checkIn, checkInHour, checkOut, checkOutHour, specialRequest, type, number, status, price, description, amenities, rooms } = req.body as BookingInterface
     
-    if (typeof id !== 'string' || id === null) {
-        return res.status(400).json({ error: 'Invalid Id' })
-    } 
     if (typeof guestName !== 'string' || guestName === null) {
         return res.status(400).json({ error: 'Invalid Name' })
     }

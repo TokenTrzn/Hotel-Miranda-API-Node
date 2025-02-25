@@ -2,11 +2,8 @@ import { Response, Request } from "express"
 import { RoomInterface } from "../interfaces/RoomInterface"
 
 export const validateContact = (req: Request, res: Response) => {
-    const { id, photo, number, name, type, amenities, price, offerPrice, status, bookings } = req.body as RoomInterface
+    const { photo, number, name, type, amenities, price, offerPrice, status, bookings } = req.body as RoomInterface
     
-    if (typeof id !== 'string' || id === null) {
-        return res.status(400).json({ error: 'Invalid Id' })
-    } 
     if (typeof photo !== 'string' || photo === null) {
         return res.status(400).json({ error: 'Invalid File' })
     }

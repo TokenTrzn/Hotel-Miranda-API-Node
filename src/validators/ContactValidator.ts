@@ -2,11 +2,8 @@ import { Response, Request } from "express"
 import { ContactInterface } from "../interfaces/ContactInterface"
 
 export const validateContact = (req: Request, res: Response) => {
-    const { id, date, hour, name, email, phone, comment, isArchived } = req.body as ContactInterface
+    const { date, hour, name, email, phone, comment, isArchived } = req.body as ContactInterface
     
-    if (typeof id !== 'string' || id === null) {
-        return res.status(400).json({ error: 'Invalid Id' })
-    } 
     if (typeof date !== 'string' || date === null) {
         return res.status(400).json({ error: 'Invalid Date' })
     }

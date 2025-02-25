@@ -2,11 +2,8 @@ import { Response, Request } from "express"
 import { UserInterface } from "../interfaces/UserInterface"
 
 export const validateContact = (req: Request, res: Response) => {
-    const { id, photo, name, email, startDate, description, contact, status } = req.body as UserInterface
+    const { photo, name, email, startDate, description, contact, status } = req.body as UserInterface
     
-    if (typeof id !== 'string' || id === null) {
-        return res.status(400).json({ error: 'Invalid Id' })
-    } 
     if (typeof photo !== 'string' || photo === null) {
         return res.status(400).json({ error: 'Invalid File' })
     }
