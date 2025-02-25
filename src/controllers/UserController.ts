@@ -106,7 +106,7 @@ userRouter.get(baseUrl, async (req: Request, res: Response) => {
  */
 
 userRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const user = await userService.fetchById(parseInt(req.params.id))
+    const user = await userService.fetchById(req.params.id)
     if (user !== null) {
         res.json(user)
     } else {
@@ -210,7 +210,7 @@ userRouter.post(baseUrl, async (req: Request, res: Response) => {
  */
 
 userRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedUser = await userService.update(parseInt(req.params.id), req.body)
+    const updatedUser = await userService.update(req.params.id, req.body)
     if (updatedUser !== null) {
         res.status(204).json(updatedUser)
     } else {
@@ -264,7 +264,7 @@ userRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 userRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedUser = await userService.delete(parseInt(req.params.id))
+    const deletedUser = await userService.delete(req.params.id)
     if (deletedUser) {
         res.status(204).json({ message: 'User deleted' })
     } else {

@@ -1,12 +1,15 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import users from '../data/usersData.json'
 import { UserInterface } from "../interfaces/UserInterface";
+import { UserService } from './UserService';
 
 export class LoginService {
     static async login(email: string, password: string): Promise<string | null> {
         try {
-            const user: UserInterface | undefined = users.find(u => u.email === email)
+
+            const userService = new UserService()
+            const userData = await userService.fetchAll()
+            const user: UserInterface | undefined = userData.find(u => u.email === email)
             if (user === undefined) {
                 return null
             }
