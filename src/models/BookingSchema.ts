@@ -9,10 +9,6 @@ const BookingSchema = new mongoose.Schema<BookingInterface>({
         type: String,
         required: true
     },
-    id: {
-        type: Number,
-        required: true
-    },
     orderDate: {
         type: String,
         required: true

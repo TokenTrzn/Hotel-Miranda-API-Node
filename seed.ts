@@ -13,7 +13,6 @@ async function main() {
     await mongoose.connection.dropDatabase()
 
     async function generateContacts() {
-        const id = faker.number.int()
         const date = faker.date.anytime()
         const hour = faker.date.anytime().toLocaleTimeString()
         const name = faker.person.fullName()
@@ -23,7 +22,6 @@ async function main() {
         const isArchived = faker.datatype.boolean()
 
         const contact = new ContactModel({
-            id,
             date,
             hour,
             name,
@@ -32,12 +30,11 @@ async function main() {
             comment,
             isArchived
         })
-
-        console.log(await contact.save())   
+        
+        await contact.save() 
     }
 
     async function generateBookings() {
-        const id = faker.number.int()
         const guestName = faker.person.fullName()
         const orderDate = faker.date.anytime()
         const orderDateHour = faker.date.anytime().toLocaleTimeString()
@@ -64,7 +61,6 @@ async function main() {
         ], { min: 3, max: 6 })
 
         const booking = new BookingModel({
-            id,
             guestName,
             orderDate,
             orderDateHour,
@@ -85,7 +81,6 @@ async function main() {
     }
 
     async function generateRooms() {
-        const id = faker.number.int()
         const photo = faker.system.fileName()
         const number = faker.number.int({ min: 1, max: 9999 })
         const name = faker.helpers.arrayElement(['Deluxe S', 'Deluxe A', 'VIP S', 'VIP A'])
@@ -106,7 +101,6 @@ async function main() {
         const status = faker.helpers.arrayElement(['Available', 'Booked'])
 
         const room = new RoomModel({
-            id,
             photo,
             number,
             name,
@@ -120,7 +114,6 @@ async function main() {
     }
 
     async function generateUsers() {
-        const id = faker.number.int()
         const photo = faker.system.fileName()
         const name = faker.person.fullName()
         const email = faker.internet.email()
@@ -131,7 +124,6 @@ async function main() {
         const password = await hashPassword(faker.internet.password())
 
         const user = new UserModel({
-            id,
             photo,
             name,
             email,

@@ -2,10 +2,6 @@ import mongoose from "mongoose"
 import { UserInterface } from "../interfaces/UserInterface"
 
 const UserSchema = new mongoose.Schema<UserInterface>({
-    id: {
-        type: Number,
-        required: true
-    },
     photo: {
         type: String,
         required: true

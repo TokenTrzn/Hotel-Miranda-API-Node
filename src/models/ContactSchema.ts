@@ -3,10 +3,6 @@ import { ContactInterface } from "../interfaces/ContactInterface";
 
 
 const ContactSchema = new mongoose.Schema<ContactInterface>({
-    id: {
-        type: Number,
-        required: true
-    },
     date: {
         type: String,
         required: true
