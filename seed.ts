@@ -1,12 +1,18 @@
 import { faker } from '@faker-js/faker'
 import { connectDB } from './src/utils/database'
+import { hashPassword } from './src/utils/hashPassword'
 import { BookingModel } from './src/models/BookingSchema'
 import { ContactModel } from './src/models/ContactSchema'
 import { RoomModel } from './src/models/RoomSchema'
 import { UserModel } from './src/models/UserSchema'
 import 'dotenv/config'
 import mongoose from 'mongoose'
-import { hashPassword } from './src/utils/hashPassword'
+import { RoomInterface } from './src/interfaces/RoomInterface'
+import { BookingInterface } from './src/interfaces/BookingInterface'
+import { validateContact } from './src/validators/ContactValidator'
+import { validateUser } from './src/validators/UserValidator'
+import { validateBooking } from './src/validators/BookingValidator'
+import { validateRoom } from './src/validators/RoomValidator'
 
 async function main() {
     await connectDB()
@@ -30,8 +36,34 @@ async function main() {
             comment,
             isArchived
         })
+        validateContact(contact)
         
         await contact.save() 
+    }
+
+    async function generateUsers() {
+        const photo = faker.system.fileName()
+        const name = faker.person.fullName()
+        const email = faker.internet.email()
+        const startDate = faker.date.anytime()
+        const description = faker.person.jobTitle()
+        const contact = faker.phone.number()
+        const status = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE'])
+        const password = await hashPassword(faker.internet.password())
+
+        const user = new UserModel({
+            photo,
+            name,
+            email,
+            startDate,
+            description,
+            contact,
+            status,
+            password
+        })
+        validateUser(user)
+
+        await user.save()
     }
 
     async function generateBookings() {
@@ -76,11 +108,15 @@ async function main() {
             description,
             amenities
         })
+        validateBooking(booking)
 
         await booking.save()
     }
 
     async function generateRooms() {
+        const rooms: RoomInterface[] = []
+        const bookings: BookingInterface[] = []
+
         const photo = faker.system.fileName()
         const number = faker.number.int({ min: 1, max: 9999 })
         const name = faker.helpers.arrayElement(['Deluxe S', 'Deluxe A', 'VIP S', 'VIP A'])
@@ -109,33 +145,12 @@ async function main() {
             offerPrice,
             status
         })
+        validateRoom(room)
 
         await room.save()
     }
 
-    async function generateUsers() {
-        const photo = faker.system.fileName()
-        const name = faker.person.fullName()
-        const email = faker.internet.email()
-        const startDate = faker.date.anytime()
-        const description = faker.person.jobTitle()
-        const contact = faker.phone.number()
-        const status = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE'])
-        const password = await hashPassword(faker.internet.password())
-
-        const user = new UserModel({
-            photo,
-            name,
-            email,
-            startDate,
-            description,
-            contact,
-            status,
-            password
-        })
-
-        await user.save()
-    }
+    
 
     for (let i = 0; i < 10; i++) {
         await generateContacts()

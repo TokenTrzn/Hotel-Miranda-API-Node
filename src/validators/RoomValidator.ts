@@ -1,34 +1,31 @@
-import { Response, Request } from "express"
-import { RoomInterface } from "../interfaces/RoomInterface"
+import { RoomInterface } from '../interfaces/RoomInterface'
 
-export const validateContact = (req: Request, res: Response) => {
-    const { photo, number, name, type, amenities, price, offerPrice, status, bookings } = req.body as RoomInterface
-    
-    if (typeof photo !== 'string' || photo === null) {
-        return res.status(400).json({ error: 'Invalid File' })
+export const validateRoom = (room: RoomInterface) => {    
+    if (typeof room.photo !== 'string' || room.photo === null) {
+        throw new Error('Invalid File')
     }
-    if (typeof number !== 'number' || number === null) {
-        return res.status(400).json({ error: 'Invalid Number' })
+    if (typeof room.number !== 'number' || room.number === null) {
+        throw new Error('Invalid Number')
     }
-    if (typeof name !== 'string' || name === null) {
-        return res.status(400).json({ error: 'Invalid Name' })
+    if (typeof room.name !== 'string' || room.name === null) {
+        throw new Error('Invalid Name')
     }
-    if (typeof type !== 'string' || type === null) {
-        return res.status(400).json({ error: 'Invalid Type' })
+    if (typeof room.type !== 'string' || room.type === null) {
+        throw new Error('Invalid Type')
     }
-    if (typeof amenities !== 'string' || amenities === null) {
-        return res.status(400).json({ error: 'Invalid Amenities' })
+    if (!Array.isArray(room.amenities) || room.amenities.some(a => typeof a !== 'string')) {
+        throw new Error('Invalid Amenities');
     }
-    if (typeof price !== 'string' || price === null) {
-        return res.status(400).json({ error: 'Invalid Price' })
+    if (typeof room.price !== 'string' || room.price === null) {
+        throw new Error('Invalid Price')
     }
-    if (typeof offerPrice !== 'boolean' || offerPrice === null) {
-        return res.status(400).json({ error: 'Invalid Offer Price' })
+    if (typeof room.offerPrice !== 'boolean' || room.offerPrice === null) {
+        throw new Error('Invalid Offer Price')
     }
-    if (typeof status !== 'string' || status === null) {
-        return res.status(400).json({ error: 'Invalid Status' })
+    if (!['Available', 'Booked'].includes(room.status)) {
+        throw new Error('Invalid Status');
     }
-    if (typeof bookings !== 'object' || bookings === null) {
-        return res.status(400).json({ error: 'Invalid Bookings' })
+    if (!Array.isArray(room.bookings) || room.bookings.some(b => typeof b !== 'object' || b === null)) {
+        throw new Error('Invalid Bookings');
     }
 }

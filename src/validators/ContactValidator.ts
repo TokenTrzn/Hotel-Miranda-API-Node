@@ -1,28 +1,27 @@
-import { Response, Request } from "express"
 import { ContactInterface } from "../interfaces/ContactInterface"
 
-export const validateContact = (req: Request, res: Response) => {
-    const { date, hour, name, email, phone, comment, isArchived } = req.body as ContactInterface
-    
-    if (typeof date !== 'string' || date === null) {
-        return res.status(400).json({ error: 'Invalid Date' })
+    export const validateContact = (contact: ContactInterface) => {
+        if (typeof contact.date !== 'string' || contact.date === null) {
+            throw new Error('Invalid Date') 
+        }
+        if (typeof contact.hour !== 'string' || contact.date === null) {
+            throw new Error('Invalid Hour') 
+        }
+        if (typeof contact.name !== 'string' || contact.name === null) {
+            throw new Error('Invalid Name') 
+        }
+        if (typeof contact.email !== 'string' || contact.email === null) {
+            throw new Error('Invalid Email') 
+        }
+        if (typeof contact.phone !== 'string' || contact.phone === null) {
+            throw new Error('Invalid Phone') 
+        }
+        if (typeof contact.comment !== 'string' || contact.comment === null) {
+            throw new Error('Invalid Comment') 
+        }
+        if (typeof contact.isArchived !== 'boolean' || contact.isArchived === null) {
+            throw new Error('Invalid Archived') 
+        }
     }
-    if (typeof hour !== 'string' || date === null) {
-        return res.status(400).json({ error: 'Invalid Hour' })
-    }
-    if (typeof name !== 'string' || name === null) {
-        return res.status(400).json({ error: 'Invalid Name' })
-    }
-    if (typeof email !== 'string' || email === null) {
-        return res.status(400).json({ error: 'Invalid Email' })
-    }
-    if (typeof phone !== 'string' || phone === null) {
-        return res.status(400).json({ error: 'Invalid Phone' })
-    }
-    if (typeof comment !== 'string' || comment === null) {
-        return res.status(400).json({ error: 'Invalid Comment' })
-    }
-    if (typeof isArchived !== 'boolean' || isArchived === null) {
-        return res.status(400).json({ error: 'Invalid Archived' })
-    }
-}
+
+

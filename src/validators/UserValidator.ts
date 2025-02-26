@@ -1,28 +1,25 @@
-import { Response, Request } from "express"
 import { UserInterface } from "../interfaces/UserInterface"
 
-export const validateContact = (req: Request, res: Response) => {
-    const { photo, name, email, startDate, description, contact, status } = req.body as UserInterface
-    
-    if (typeof photo !== 'string' || photo === null) {
-        return res.status(400).json({ error: 'Invalid File' })
+export const validateUser = (user: UserInterface) => {    
+    if (typeof user.photo !== 'string' || user.photo === null) {
+        throw new Error('Invalid File')
     }
-    if (typeof name !== 'string' || name === null) {
-        return res.status(400).json({ error: 'Invalid Name' })
+    if (typeof user.name !== 'string' || user.name === null) {
+        throw new Error('Invalid Name')
     }
-    if (typeof email !== 'string' || email === null) {
-        return res.status(400).json({ error: 'Invalid Email' })
+    if (typeof user.email !== 'string' || user.email === null) {
+        throw new Error('Invalid Email')
     }
-    if (typeof startDate !== 'string' || startDate === null) {
-        return res.status(400).json({ error: 'Invalid Date' })
+    if (typeof user.startDate !== 'string' || user.startDate === null) {
+        throw new Error('Invalid Date')
     }
-    if (typeof description !== 'string' || description === null) {
-        return res.status(400).json({ error: 'Invalid Description' })
+    if (typeof user.description !== 'string' || user.description === null) {
+        throw new Error('Invalid Description')
     }
-    if (typeof contact !== 'boolean' || contact === null) {
-        return res.status(400).json({ error: 'Invalid Contact' })
+    if (typeof user.contact !== 'boolean' || user.contact === null) {
+        throw new Error('Invalid Contact')
     }
-    if (typeof status !== 'string' || status === null) {
-        return res.status(400).json({ error: 'Invalid Status' })
+    if (!["ACTIVE", "INACTIVE"].includes(user.status)) {
+        throw new Error("Invalid Status");
     }
 }

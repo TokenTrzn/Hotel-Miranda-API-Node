@@ -1,52 +1,49 @@
-import { Response, Request } from "express"
-import { BookingInterface } from "../interfaces/BookingInterface"
+import { BookingInterface } from '../interfaces/BookingInterface'
 
-export const validateContact = (req: Request, res: Response) => {
-    const { guestName, orderDate, orderDateHour, checkIn, checkInHour, checkOut, checkOutHour, specialRequest, type, number, status, price, description, amenities, rooms } = req.body as BookingInterface
-    
-    if (typeof guestName !== 'string' || guestName === null) {
-        return res.status(400).json({ error: 'Invalid Name' })
+export const validateBooking = (booking: BookingInterface) => {    
+    if (typeof booking.guestName !== 'string' || booking.guestName === null) {
+        throw new Error('Invalid Name')
     }
-    if (typeof orderDate !== 'string' || orderDate === null) {
-        return res.status(400).json({ error: 'Invalid Date' })
+    if (typeof booking.orderDate !== 'string' || booking.orderDate === null) {
+        throw new Error('Invalid Date')
     }
-    if (typeof orderDateHour !== 'string' || orderDateHour === null) {
-        return res.status(400).json({ error: 'Invalid Hour' })
+    if (typeof booking.orderDateHour !== 'string' || booking.orderDateHour === null) {
+        throw new Error('Invalid Hour')
     }
-    if (typeof checkIn !== 'string' || checkIn === null) {
-        return res.status(400).json({ error: 'Invalid Date' })
+    if (typeof booking.checkIn !== 'string' || booking.checkIn === null) {
+        throw new Error('Invalid Date')
     }
-    if (typeof checkInHour !== 'string' || checkInHour === null) {
-        return res.status(400).json({ error: 'Invalid Hour' })
+    if (typeof booking.checkInHour !== 'string' || booking.checkInHour === null) {
+        throw new Error('Invalid Hour')
     }
-    if (typeof checkOut !== 'string' || checkOut === null) {
-        return res.status(400).json({ error: 'Invalid Date' })
+    if (typeof booking.checkOut !== 'string' || booking.checkOut === null) {
+        throw new Error('Invalid Date')
     }
-    if (typeof checkOutHour !== 'string' || checkOutHour === null) {
-        return res.status(400).json({ error: 'Invalid Hour' })
+    if (typeof booking.checkOutHour !== 'string' || booking.checkOutHour === null) {
+        throw new Error('Invalid Hour')
     }
-    if (typeof specialRequest !== 'boolean' || specialRequest === null) {
-        return res.status(400).json({ error: 'Invalid Special Request' })
+    if (typeof booking.specialRequest !== 'boolean' || booking.specialRequest === null) {
+        throw new Error('Invalid Special Request')
     }
-    if (typeof type !== 'string' || type === null) {
-        return res.status(400).json({ error: 'Invalid Type' })
+    if (!['Premium A', 'Premium B', 'Standard A', 'Standard B'].includes(booking.type)) {
+        throw new Error('Invalid Type');
     }
-    if (typeof number !== 'number' || number === null) {
-        return res.status(400).json({ error: 'Invalid Number' })
+    if (typeof booking.number !== 'number' || booking.number === null) {
+        throw new Error('Invalid Number')
     }
-    if (typeof status !== 'string' || status === null) {
-        return res.status(400).json({ error: 'Invalid Status' })
+    if (!['Check In', 'Check Out', 'In Progress'].includes(booking.status)) {
+        throw new Error('Invalid Status');
     }
-    if (typeof price !== 'string' || price === null) {
-        return res.status(400).json({ error: 'Invalid Price' })
+    if (typeof booking.price !== 'string' || booking.price === null) {
+        throw new Error('Invalid Price')
     }
-    if (typeof description !== 'string' || description === null) {
-        return res.status(400).json({ error: 'Invalid Description' })
+    if (typeof booking.description !== 'string' || booking.description === null) {
+        throw new Error('Invalid Description')
     }
-    if (typeof amenities !== 'string' || amenities === null) {
-        return res.status(400).json({ error: 'Invalid Amenities' })
+    if (!Array.isArray(booking.amenities) || booking.amenities.some(a => typeof a !== 'string')) {
+        throw new Error('Invalid Amenities');
     }
-    if (typeof rooms !== 'object' || rooms === null) {
-        return res.status(400).json({ error: 'Invalid Rooms' })
+    if (!Array.isArray(booking.rooms) || booking.rooms.some(b => typeof b !== 'object' || b === null)) {
+        throw new Error('Invalid Rooms');
     }
 }
