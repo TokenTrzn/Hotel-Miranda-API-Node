@@ -16,7 +16,7 @@ export const validateUser = (user: UserInterface) => {
     if (typeof user.description !== 'string' || user.description === null) {
         throw new Error('Invalid Description')
     }
-    if (typeof user.contact !== 'boolean' || user.contact === null) {
+    if (typeof user.contact !== 'string' || user.contact === null) {
         throw new Error('Invalid Contact')
     }
     if (!["ACTIVE", "INACTIVE"].includes(user.status)) {

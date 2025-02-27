@@ -19,7 +19,7 @@ export const validateRoom = (room: RoomInterface) => {
     if (typeof room.price !== 'string' || room.price === null) {
         throw new Error('Invalid Price')
     }
-    if (typeof room.offerPrice !== 'boolean' || room.offerPrice === null) {
+    if (typeof room.offerPrice !== 'string' || room.offerPrice === null) {
         throw new Error('Invalid Offer Price')
     }
     if (!['Available', 'Booked'].includes(room.status)) {
