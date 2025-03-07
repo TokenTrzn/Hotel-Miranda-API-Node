@@ -1,9 +1,10 @@
 import { Request, Response, Router } from "express"
-import { UserService } from "../services/UserService"
+import { createUser, deleteUser, getUserById, getUsers, updateUser, UserService } from "../services/UserService"
 
 export const userRouter = Router()
 const userService = new UserService()
 const baseUrl = '/users'
+
 /**
  * @swagger
  * tags:
@@ -56,8 +57,11 @@ const baseUrl = '/users'
  */
 
 userRouter.get(baseUrl, async (req: Request, res: Response) => {
-    const userList = await userService.fetchAll()
-    res.json(userList)
+    const users = await getUsers()
+    res.json(users)
+    
+    //const userList = await userService.fetchAll()
+    //res.json(userList)
 })
 
 /**
@@ -106,12 +110,8 @@ userRouter.get(baseUrl, async (req: Request, res: Response) => {
  */
 
 userRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const user = await userService.fetchById(req.params.id)
-    if (user !== null) {
-        res.json(user)
-    } else {
-        res.status(404).json({ message: 'User not found' })
-    }
+    const user = await getUserById(parseInt(req.params.id))
+    res.json(user)
 })
 
 /**
@@ -160,8 +160,8 @@ userRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 userRouter.post(baseUrl, async (req: Request, res: Response) => {
-    const newUser = await userService.create(req.body)
-    res.status(201).json(newUser)
+    const newUser = await createUser(req.body)
+    res.json(newUser)
 })
 
 /**
@@ -210,12 +210,8 @@ userRouter.post(baseUrl, async (req: Request, res: Response) => {
  */
 
 userRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedUser = await userService.update(req.params.id, req.body)
-    if (updatedUser !== null) {
-        res.status(204).json(updatedUser)
-    } else {
-        res.status(404).json({ message: 'User not found' })
-    }
+    const updatedUser = await updateUser(parseInt(req.params.id), req.body)
+    res.json(updatedUser)
 })
 
 /**
@@ -264,10 +260,6 @@ userRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 userRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedUser = await userService.delete(req.params.id)
-    if (deletedUser) {
-        res.status(204).json({ message: 'User deleted' })
-    } else {
-        res.status(404).json({ message: 'User not found' })
-    }
+    const deletedUser = await deleteUser(parseInt(req.params.id))
+    res.json(deletedUser)
 })

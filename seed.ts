@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { connectDB } from './src/utils/database'
+import { connectDB, connectSql } from './src/utils/database'
 import { hashPassword } from './src/utils/hashPassword'
 import { BookingModel } from './src/models/BookingSchema'
 import { ContactModel } from './src/models/ContactSchema'
@@ -15,8 +15,13 @@ import { validateBooking } from './src/validators/BookingValidator'
 import { validateRoom } from './src/validators/RoomValidator'
 
 async function main() {
-    await connectDB()
-    await mongoose.connection.dropDatabase()
+
+    //await connectDB()
+    //await mongoose.connection.dropDatabase()
+
+    const connection = await connectSql.getConnection()
+    console.log('Conectado a la DB')
+    connection.release()
 
     async function generateContacts() {
         const date = faker.date.anytime()
@@ -51,7 +56,13 @@ async function main() {
         const status = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE'])
         const password = await hashPassword(faker.internet.password())
 
-        const user = new UserModel({
+        await connectSql.execute(
+            'INSERT INTO users (photo, name, email, startDate, description, contact, status, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+            [photo, name, email, startDate, description, contact, status, password]
+        )
+
+        /**
+         * const user = new UserModel({
             photo,
             name,
             email,
@@ -64,6 +75,9 @@ async function main() {
         validateUser(user)
 
         await user.save()
+         */
+
+        
     }
 
     async function generateBookings() {
@@ -153,9 +167,9 @@ async function main() {
     
 
     for (let i = 0; i < 10; i++) {
-        await generateContacts()
-        await generateBookings();
-        await generateRooms()
+        //await generateContacts()
+        //await generateBookings();
+        //await generateRooms()
         await generateUsers()
     }
 }
