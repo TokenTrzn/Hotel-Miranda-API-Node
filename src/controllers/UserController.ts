@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express"
-import { createUser, deleteUser, getUserById, getUsers, updateUser } from "../services/UserService"
+import { UserService } from "../services/UserService"
 
 export const userRouter = Router()
-const baseUrl = '/users'
+const userService = new UserService()
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const baseUrl = '/users'
  */
 /**
  * @swagger
- * /users :
+ * /api/v1/users:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -55,17 +55,14 @@ const baseUrl = '/users'
  *                      example: "password"
  */
 
-userRouter.get(baseUrl, async (req: Request, res: Response) => {
-    const users = await getUsers()
-    res.json(users)
-    
-    //const userList = await userService.fetchAll()
-    //res.json(userList)
+userRouter.get('/api/v1/users', (req: Request, res: Response) => {
+    const userList = userService.fetchAll()
+    res.json(userList)
 })
 
 /**
  * @swagger
- * /users/:id :
+ * /api/v1/users/:id:
  *   get:
  *     summary: Get a user by Id
  *     tags: [Users]
@@ -108,14 +105,18 @@ userRouter.get(baseUrl, async (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const user = await getUserById(parseInt(req.params.id))
-    res.json(user)
+userRouter.get('/api/v1/users/:id', (req: Request, res: Response) => {
+    const user = userService.fetchById(req.params.id)
+    if (user !== null) {
+        res.json(user)
+    } else {
+        res.status(404).json({ message: 'User not found' })
+    }
 })
 
 /**
  * @swagger
- * /users/create :
+ * /api/v1/users:
  *   post:
  *     summary: Create a user
  *     tags: [Users]
@@ -158,14 +159,14 @@ userRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.post(baseUrl, async (req: Request, res: Response) => {
-    const newUser = await createUser(req.body)
-    res.json(newUser)
+userRouter.post('/api/v1/users', (req: Request, res: Response) => {
+    const newUser = userService.create(req.body)
+    res.status(201).json(newUser)
 })
 
 /**
  * @swagger
- * /users/:id :
+ * /api/v1/users/:id:
  *   put:
  *     summary: Edit a user
  *     tags: [Users]
@@ -208,14 +209,18 @@ userRouter.post(baseUrl, async (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedUser = await updateUser(parseInt(req.params.id), req.body)
-    res.json(updatedUser)
+userRouter.put('/api/v1/users/:id', (req: Request, res: Response) => {
+    const updatedUser = userService.update(req.params.id, req.body)
+    if (updatedUser !== null) {
+        res.status(204).json(updatedUser)
+    } else {
+        res.status(404).json({ message: 'User not found' })
+    }
 })
 
 /**
  * @swagger
- * /users/:id :
+ * /api/v1/users/:id:
  *   delete:
  *     summary: Delete a user
  *     tags: [Users]
@@ -258,7 +263,11 @@ userRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedUser = await deleteUser(parseInt(req.params.id))
-    res.json(deletedUser)
+userRouter.delete('/api/v1/users/:id', (req: Request, res: Response) => {
+    const deletedUser = userService.delete(req.params.id)
+    if (deletedUser !== null) {
+        res.status(204).json({ message: 'User deleted' })
+    } else {
+        res.status(404).json({ message: 'User not found' })
+    }
 })

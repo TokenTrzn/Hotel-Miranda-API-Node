@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express"
-import { createRoom, deleteRoom, getRoomById, getRooms, updateRoom } from "../services/RoomService"
+import { RoomService } from "../services/RoomService"
 
 export const roomRouter = Router()
-const baseUrl = '/rooms'
+const roomService = new RoomService()
 /**
  * @swagger
  * tags:
@@ -11,7 +11,7 @@ const baseUrl = '/rooms'
  */
 /**
  * @swagger
- * /rooms :
+ * /api/v1/rooms:
  *   get:
  *     summary: Get all rooms
  *     tags: [Rooms]
@@ -54,14 +54,14 @@ const baseUrl = '/rooms'
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl, async (req: Request, res: Response) => {
-    const roomList = await getRooms()
+roomRouter.get('/api/v1/rooms', (req: Request, res: Response) => {
+    const roomList = roomService.fetchAll()
     res.json(roomList)
 })
 
 /**
  * @swagger
- * /rooms/:id :
+ * /api/v1/rooms/:id:
  *   get:
  *     summary: Get a room by Id
  *     tags: [Rooms]
@@ -104,20 +104,24 @@ roomRouter.get(baseUrl, async (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const room = await getRoomById(parseInt(req.params.id))
-    res.json(room)
+roomRouter.get('/api/v1/rooms/:id', (req: Request, res: Response) => {
+    const room = roomService.fetchById(req.params.id)
+    if (room !== null) {
+        res.json(room)
+    } else {
+        res.status(404).json({ message: 'Room not found' })
+    }
 })
 
 /**
  * @swagger
- * /rooms/create :
+ * /api/v1/rooms:
  *   post:
  *     summary: Crea una room
  *     tags: [Rooms]
  *     responses:
  *       200:
- *         description: Crea una room
+ *         description: Create a room
  *         content:
  *           application/json:
  *             schema:
@@ -154,14 +158,14 @@ roomRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.post(baseUrl, async (req: Request, res: Response) => {
-    const newRoom = await createRoom(req.body)
-    res.json(newRoom)
+roomRouter.post('/api/v1/rooms', (req: Request, res: Response) => {
+    const newRoom = roomService.create(req.body)
+    res.status(201).json(newRoom)
 })
 
 /**
  * @swagger
- * /rooms/:id :
+ * /api/v1/rooms/:id:
  *   put:
  *     summary: Edit a room
  *     tags: [Rooms]
@@ -204,14 +208,18 @@ roomRouter.post(baseUrl, async (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedRoom = await updateRoom(parseInt(req.params.id), req.body)
-    res.json(updatedRoom)
+roomRouter.put('/api/v1/rooms/:id', (req: Request, res: Response) => {
+    const updatedRoom = roomService.update(req.params.id, req.body)
+    if (updatedRoom !== null) {
+        res.status(204).json(updatedRoom)
+    } else {
+        res.status(404).json({ message: 'Room not found' })
+    }
 })
 
 /**
  * @swagger
- * /rooms/:id :
+ * /api/v1/rooms/:id :
  *   delete:
  *     summary: Delete a room
  *     tags: [Rooms]
@@ -254,7 +262,11 @@ roomRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedRoom = await deleteRoom(parseInt(req.params.id))
-    res.json(deletedRoom)
+roomRouter.delete('/api/v1/rooms/:id', (req: Request, res: Response) => {
+    const deletedRoom = roomService.delete(req.params.id)
+    if (deletedRoom !== null) {
+        res.status(204).json({ message: 'Room deleted' })
+    } else {
+        res.status(404).json({ message: 'Room not found' })
+    }
 })

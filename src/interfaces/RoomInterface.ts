@@ -1,7 +1,7 @@
 import { BookingInterface } from "./BookingInterface";
 
 export interface RoomInterface {
-    id: number;
+    id: string;
     photo: string;
     number: number;
     name: string;

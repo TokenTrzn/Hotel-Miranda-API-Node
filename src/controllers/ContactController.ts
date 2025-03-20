@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
-import { ContactService, createContact, deleteContact, getContactById, getContacts, updateContact } from "../services/ContactService";
+import { ContactService } from "../services/ContactService";
 
 export const contactRouter = Router()
 const contactService = new ContactService()
-const baseUrl = '/contacts'
+
 /**
  * @swagger
  * tags:
@@ -12,7 +12,7 @@ const baseUrl = '/contacts'
  */
 /**
  * @swagger
- * /contacts:
+ * /api/v1/contacts:
  *   get:
  *     summary: Get all contacts
  *     tags: [Contacts]
@@ -52,14 +52,14 @@ const baseUrl = '/contacts'
  *                      example: true              
  */
 
-contactRouter.get(baseUrl, async (req: Request, res: Response) => {
-    const contacts = await getContacts() 
-    res.json(contacts)
+contactRouter.get('/api/v1/contacts', (req: Request, res: Response) => {
+    const contactList = contactService.fetchAll()
+    res.json(contactList)
 })
 
 /**
  * @swagger
- * /contacts/:id :
+ * /api/v1/contacts/:id :
  *   get:
  *     summary: Get a contact by Id
  *     tags: [Contacts]
@@ -99,14 +99,18 @@ contactRouter.get(baseUrl, async (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const contact = await getContactById(parseInt(req.params.id))
-    res.json(contact)
+contactRouter.get('/api/v1/contacts/:id', (req: Request, res: Response) => {
+    const contact = contactService.fetchById(req.params.id)
+    if (contact !== null) {
+        res.json(contact)
+    } else {
+        res.status(404).json({ message: 'Contact not found' })
+    }
 })
 
 /**
  * @swagger
- * /contacts/create :
+ * /api/v1/contacts :
  *   post:
  *     summary: Create a contact
  *     tags: [Contacts]
@@ -146,14 +150,14 @@ contactRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.post(baseUrl, async (req: Request, res: Response) => {
-    const newContact = await createContact(req.body)
-    res.json(newContact)
+contactRouter.post('/api/v1/contacts', (req: Request, res: Response) => {
+    const newContact = contactService.create(req.body)
+    res.status(201).json(newContact)
 })
 
 /**
  * @swagger
- * /contacts/:id :
+ * /api/v1/contacts/:id :
  *   put:
  *     summary: Edit a contact
  *     tags: [Contacts]
@@ -193,14 +197,18 @@ contactRouter.post(baseUrl, async (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedContact = await updateContact(parseInt(req.params.id), req.body)
-    res.json(updatedContact)
+contactRouter.put('/api/v1/contacts/:id', (req: Request, res: Response) => {
+    const updateContact = contactService.update(req.params.id, req.body)
+    if (updateContact !== null) {
+        res.status(204).json(updateContact)
+    } else {
+        res.status(404).json({ message: 'Contact not found' })
+    }
 })
 
 /**
  * @swagger
- * /contacts/:id :
+ * /api/v1/contacts/:id :
  *   delete:
  *     summary: Delete a contact
  *     tags: [Contacts]
@@ -240,7 +248,11 @@ contactRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedContact = await deleteContact(parseInt(req.params.id))
-    res.json(deletedContact)
+contactRouter.delete('/api/v1/contacts/:id', (req: Request, res: Response) => {
+    const deletedContact = contactService.delete(req.params.id)
+    if (deletedContact !== null) {
+        res.status(204).json({ message: 'Contact deleted' })
+    } else {
+        res.status(404).json({ message: 'Contact not found' })
+    }
 })
