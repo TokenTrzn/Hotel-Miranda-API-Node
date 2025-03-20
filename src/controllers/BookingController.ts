@@ -1,11 +1,8 @@
 import { Request, Response, Router } from "express"
-import { BookingService } from "../services/BookingService"
-import { RoomService } from "../services/RoomService"
-import { authenticate } from "../middleware/auth"
+import { createbooking, deletebooking, getBookingById, getBookings, updatebooking } from "../services/BookingService"
 
 export const bookingRouter = Router()
-const bookingService = new BookingService()
-const roomService = new RoomService()
+const baseUrl = '/bookings'
 
 /**
  * @swagger
@@ -15,7 +12,7 @@ const roomService = new RoomService()
  */
 /**
  *  @swagger
- * /api/v1/bookings:
+ * /bookings :
  *   get:
  *     summary: Get all bookings
  *     tags: [Bookings]
@@ -54,8 +51,8 @@ const roomService = new RoomService()
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -76,14 +73,14 @@ const roomService = new RoomService()
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get('/api/v1/bookings', (req: Request, res: Response) => {
-    const bookingList = bookingService.fetchAll()
+bookingRouter.get(baseUrl, async (req: Request, res: Response) => {
+    const bookingList = await getBookings()
     res.json(bookingList)
 })
 
 /**
  *  @swagger
- * /api/v1/bookings/:id:
+ * /bookings/:id :
  *   get:
  *     summary: Get a booking by Id
  *     tags: [Bookings]
@@ -122,8 +119,8 @@ bookingRouter.get('/api/v1/bookings', (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -144,18 +141,14 @@ bookingRouter.get('/api/v1/bookings', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get('/api/v1/bookings/:id', (req: Request, res: Response) => {
-    const booking = bookingService.fetchById(parseInt(req.params.id))
-    if (booking !== null) {
-        res.json(booking)
-    } else {
-        res.status(404).json({ message: 'Booking not found' })
-    }
+bookingRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const booking = await getBookingById(parseInt(req.params.id))
+    res.json(booking)
 })
 
 /**
  *  @swagger
- * /api/v1/bookings:
+ * /bookings/create :
  *   post:
  *     summary: Create a booking
  *     tags: [Bookings]
@@ -194,8 +187,8 @@ bookingRouter.get('/api/v1/bookings/:id', (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -216,14 +209,14 @@ bookingRouter.get('/api/v1/bookings/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.post('/api/v1/bookings', (req: Request, res: Response) => {
-    const newBooking = bookingService.create(req.body)
-    res.status(201).json(newBooking)
+bookingRouter.post(baseUrl, async (req: Request, res: Response) => {
+    const newBooking = await createbooking(req.body)
+    res.json(newBooking)
 })
 
 /**
  *  @swagger
- * /api/v1/bookings/:id:
+ * /bookings/:id :
  *   put:
  *     summary: Edit a booking
  *     tags: [Bookings]
@@ -262,8 +255,8 @@ bookingRouter.post('/api/v1/bookings', (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -284,18 +277,14 @@ bookingRouter.post('/api/v1/bookings', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.put('/api/v1/bookings/:id', (req: Request, res: Response) => {
-    const updatedBooking = bookingService.update(parseInt(req.params.id), req.body)
-    if (updatedBooking !== null) {
-        res.status(204).json(updatedBooking)
-    } else {
-        res.status(404).json({ message: 'Booking not found' })
-    }
+bookingRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const updatedBooking = await updatebooking(parseInt(req.params.id), req.body)
+    res.json(updatedBooking)
 })
 
 /**
  *  @swagger
- * /api/v1/bookings/:id :
+ * /bookings/:id :
  *   delete:
  *     summary: Delete a booking
  *     tags: [Bookings]
@@ -334,8 +323,8 @@ bookingRouter.put('/api/v1/bookings/:id', (req: Request, res: Response) => {
  *                      type: string
  *                      example: "7:45 PM"
  *                   specialRequest: 
- *                      type: string
- *                      example: "true"
+ *                      type: boolean
+ *                      example: true
  *                   type:
  *                      type: string
  *                      example: "Premium A"
@@ -356,11 +345,7 @@ bookingRouter.put('/api/v1/bookings/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.delete('/api/v1/bookings/:id', (req: Request, res: Response) => {
-    const deletedBooking = bookingService.delete(parseInt(req.params.id))
-    if (deletedBooking) {
-        res.status(204).json({ message: 'Booking deleted' })
-    } else {
-        res.status(404).json({ message: 'Booking not found' })
-    }
+bookingRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
+    const deletedBooking = await deletebooking(parseInt(req.params.id))
+    res.json(deletedBooking)
 })

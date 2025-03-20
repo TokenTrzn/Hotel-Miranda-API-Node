@@ -1,18 +1,26 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
+import { UserInterface } from "../interfaces/UserInterface";
+
+declare module "express" {
+    interface Request {
+      user?: UserInterface;
+    }
+  }
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers['authorization'] || req.query.token
+    const token = req.headers['authorization']?.split(' ')[1]
 
-    if (!authHeader || typeof authHeader !== 'string') {
-        return res.status(403).json({ message: 'No token provided' })
+    if (token === undefined) {
+        res.status(403).json({ message: 'Access denied. Token is required' })
     }
 
-    jwt.verify(authHeader, process.env.SECRET_TOKEN as string, err => {
-        if (err) {
-            return res.status(403).json({ message: 'Unauthorized' })
-        }
-
-        next()
-    })
+    else {
+        jwt.verify(token, process.env.TOKEN_SECRET as string, error => {
+            if (error) {
+                res.status(403).json({ message: 'Invalid token' })
+            }
+            next()
+        })
+    }
 }

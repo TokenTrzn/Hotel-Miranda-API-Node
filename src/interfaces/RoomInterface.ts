@@ -1,3 +1,5 @@
+import { BookingInterface } from "./BookingInterface";
+
 export interface RoomInterface {
     id: number;
     photo: string;
@@ -7,5 +9,6 @@ export interface RoomInterface {
     amenities: string[];
     price: string;
     offerPrice: string;
-    status: 'Booked' | 'Available'
+    status: 'Booked' | 'Available';
+    bookings: BookingInterface[]
 }

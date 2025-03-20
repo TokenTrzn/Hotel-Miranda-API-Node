@@ -1,3 +1,5 @@
+import { RoomInterface } from "./RoomInterface";
+
 export interface BookingInterface {
     id: number;
     guestName: string;
@@ -7,11 +9,12 @@ export interface BookingInterface {
     checkInHour: string;
     checkOut: string;
     checkOutHour: string;
-    specialRequest: 'true' | 'false';
+    specialRequest: boolean;
     type: string;
     number: number;
     status: 'Check In' | 'Check Out' | 'In Progress';
     price: string;
     description: string;
     amenities: string[];
+    rooms: RoomInterface[]
 }
