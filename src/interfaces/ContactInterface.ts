@@ -1,4 +1,5 @@
 export interface ContactInterface {
+    id: number;
     date: string;
     hour: string;
     name: string;

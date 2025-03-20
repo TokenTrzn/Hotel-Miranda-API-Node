@@ -1,8 +1,7 @@
 import { Request, Response, Router } from "express"
-import { RoomService } from "../services/RoomService"
+import { createRoom, deleteRoom, getRoomById, getRooms, updateRoom } from "../services/RoomService"
 
 export const roomRouter = Router()
-const roomService = new RoomService()
 const baseUrl = '/rooms'
 /**
  * @swagger
@@ -56,7 +55,7 @@ const baseUrl = '/rooms'
  */
 
 roomRouter.get(baseUrl, async (req: Request, res: Response) => {
-    const roomList = await roomService.fetchAll()
+    const roomList = await getRooms()
     res.json(roomList)
 })
 
@@ -106,12 +105,8 @@ roomRouter.get(baseUrl, async (req: Request, res: Response) => {
  */
 
 roomRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const room = await roomService.fetchById(req.params.id)
-    if (room !== null) {
-        res.json(room)
-    } else {
-        res.status(404).json({ message: 'Room not found' })
-    }
+    const room = await getRoomById(parseInt(req.params.id))
+    res.json(room)
 })
 
 /**
@@ -159,9 +154,9 @@ roomRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.post(baseUrl + '/create', async (req: Request, res: Response) => {
-    const newRoom = await roomService.create(req.body)
-    res.status(201).json(newRoom)
+roomRouter.post(baseUrl, async (req: Request, res: Response) => {
+    const newRoom = await createRoom(req.body)
+    res.json(newRoom)
 })
 
 /**
@@ -210,12 +205,8 @@ roomRouter.post(baseUrl + '/create', async (req: Request, res: Response) => {
  */
 
 roomRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedRoom = await roomService.update(req.params.id, req.body)
-    if (updatedRoom !== null) {
-        res.status(204).json(updatedRoom)
-    } else {
-        res.status(404).json({ message: 'Room not found' })
-    }
+    const updatedRoom = await updateRoom(parseInt(req.params.id), req.body)
+    res.json(updatedRoom)
 })
 
 /**
@@ -264,10 +255,6 @@ roomRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 roomRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedRoom = await roomService.delete(req.params.id)
-    if (deletedRoom) {
-        res.status(204).json({ message: 'Room deleted' })
-    } else {
-        res.status(404).json({ message: 'Room not found' })
-    }
+    const deletedRoom = await deleteRoom(parseInt(req.params.id))
+    res.json(deletedRoom)
 })

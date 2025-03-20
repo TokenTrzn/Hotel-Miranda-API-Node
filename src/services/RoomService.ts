@@ -1,6 +1,46 @@
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { RoomInterface } from "../interfaces/RoomInterface";
 import { ServiceInterface } from "../interfaces/ServiceInterface";
 import { RoomModel } from "../models/RoomSchema";
+import { connectSql } from "../utils/database";
+
+export const getRooms = async () => {
+    const [rows] = await connectSql.query('SELECT * FROM rooms')
+    return rows
+}
+
+export const getRoomById = async (id: number) => {
+    const [room] = await connectSql.query<RowDataPacket[]>('SELECT * FROM rooms WHERE id = ?', [id])
+    return room[0]
+}
+
+export const createRoom = async (room: RoomInterface) => {
+    const [result] = await connectSql.query<ResultSetHeader>(
+        'INSERT INTO rooms (photo, number, name, type, amenities, price, offerPrice, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [room.photo, room.number, room.name, room.type, room.amenities, room.price, room.offerPrice, room.status]
+    )
+    return result
+}
+
+export const updateRoom = async (id: number, room: RoomInterface) => {
+    const [result] = await connectSql.query<ResultSetHeader>(
+        'UPDATE rooms SET photo = ?, number = ?, name = ?, type = ?, amenities = ?, price = ?, offerPrice = ?, status WHERE id = ?',
+        [room.photo, room.number, room.name, room.type, room.amenities, room.price, room.offerPrice, room.status, id]
+    )
+    return result
+}
+
+export const deleteRoom = async (id: number) => {
+    const [result] = await connectSql.query<ResultSetHeader>('DELETE FROM rooms WHERE id = ?', [id])
+    return result
+}
+
+
+
+
+
+
+
 
 
 export class RoomService implements ServiceInterface<RoomInterface> {

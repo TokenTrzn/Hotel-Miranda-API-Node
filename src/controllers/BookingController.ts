@@ -1,8 +1,7 @@
 import { Request, Response, Router } from "express"
-import { BookingService } from "../services/BookingService"
+import { createbooking, deletebooking, getBookingById, getBookings, updatebooking } from "../services/BookingService"
 
 export const bookingRouter = Router()
-const bookingService = new BookingService()
 const baseUrl = '/bookings'
 
 /**
@@ -75,7 +74,7 @@ const baseUrl = '/bookings'
  */
 
 bookingRouter.get(baseUrl, async (req: Request, res: Response) => {
-    const bookingList = await bookingService.fetchAll()
+    const bookingList = await getBookings()
     res.json(bookingList)
 })
 
@@ -143,12 +142,8 @@ bookingRouter.get(baseUrl, async (req: Request, res: Response) => {
  */
 
 bookingRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const booking = await bookingService.fetchById(req.params.id)
-    if (booking !== null) {
-        res.json(booking)
-    } else {
-        res.status(404).json({ message: 'Booking not found' })
-    }
+    const booking = await getBookingById(parseInt(req.params.id))
+    res.json(booking)
 })
 
 /**
@@ -215,8 +210,8 @@ bookingRouter.get(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 bookingRouter.post(baseUrl, async (req: Request, res: Response) => {
-    const newBooking = await bookingService.create(req.body)
-    res.status(201).json(newBooking)
+    const newBooking = await createbooking(req.body)
+    res.json(newBooking)
 })
 
 /**
@@ -283,12 +278,8 @@ bookingRouter.post(baseUrl, async (req: Request, res: Response) => {
  */
 
 bookingRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const updatedBooking = await bookingService.update(req.params.id, req.body)
-    if (updatedBooking !== null) {
-        res.status(204).json(updatedBooking)
-    } else {
-        res.status(404).json({ message: 'Booking not found' })
-    }
+    const updatedBooking = await updatebooking(parseInt(req.params.id), req.body)
+    res.json(updatedBooking)
 })
 
 /**
@@ -355,10 +346,6 @@ bookingRouter.put(baseUrl + '/:id', async (req: Request, res: Response) => {
  */
 
 bookingRouter.delete(baseUrl + '/:id', async (req: Request, res: Response) => {
-    const deletedBooking = await bookingService.delete(req.params.id)
-    if (deletedBooking) {
-        res.status(204).json({ message: 'Booking deleted' })
-    } else {
-        res.status(404).json({ message: 'Booking not found' })
-    }
+    const deletedBooking = await deletebooking(parseInt(req.params.id))
+    res.json(deletedBooking)
 })

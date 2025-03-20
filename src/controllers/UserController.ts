@@ -1,8 +1,7 @@
 import { Request, Response, Router } from "express"
-import { createUser, deleteUser, getUserById, getUsers, updateUser, UserService } from "../services/UserService"
+import { createUser, deleteUser, getUserById, getUsers, updateUser } from "../services/UserService"
 
 export const userRouter = Router()
-const userService = new UserService()
 const baseUrl = '/users'
 
 /**

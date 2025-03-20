@@ -17,8 +17,9 @@ export const getUserById = async (id: number) => {
 export const createUser = async (user: UserInterface) => {
     const [result] = await connectSql.query<ResultSetHeader>(
         'INSERT INTO users (photo, name, email, startDate, description, contact, status, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [user.photo, user.name, user.email, user.startDate, user.description, user.contact, user. status, user.password]
+        [user.photo, user.name, user.email, user.startDate, user.description, user.contact, user.status, user.password]
     )
+    return result
 }
 
 export const updateUser = async (id: number, user: UserInterface) => {
@@ -26,11 +27,18 @@ export const updateUser = async (id: number, user: UserInterface) => {
         'UPDATE users SET photo = ?, name = ?, email = ?, startDate = ?, description = ?, contact = ?, status = ?, password = ? WHERE id = ?',
         [user.photo, user.name, user.email, user.startDate, user.description, user.contact, user.status, user.password, id]
     )
+    return result
 }
 
 export const deleteUser = async (id: number) => {
     const [result] = await connectSql.query<ResultSetHeader>('DELETE FROM users WHERE id = ?', [id])
+    return result
 }
+
+
+
+
+
 
 export class UserService implements ServiceInterface<UserInterface> {
     async fetchAll(): Promise<UserInterface[]> {

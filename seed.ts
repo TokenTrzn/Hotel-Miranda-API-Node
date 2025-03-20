@@ -1,23 +1,11 @@
 import { faker } from '@faker-js/faker'
-import { connectDB, connectSql } from './src/utils/database'
+import { connectSql } from './src/utils/database'
 import { hashPassword } from './src/utils/hashPassword'
-import { BookingModel } from './src/models/BookingSchema'
-import { ContactModel } from './src/models/ContactSchema'
-import { RoomModel } from './src/models/RoomSchema'
-import { UserModel } from './src/models/UserSchema'
 import 'dotenv/config'
-import mongoose from 'mongoose'
 import { RoomInterface } from './src/interfaces/RoomInterface'
 import { BookingInterface } from './src/interfaces/BookingInterface'
-import { validateContact } from './src/validators/ContactValidator'
-import { validateUser } from './src/validators/UserValidator'
-import { validateBooking } from './src/validators/BookingValidator'
-import { validateRoom } from './src/validators/RoomValidator'
 
 async function main() {
-
-    //await connectDB()
-    //await mongoose.connection.dropDatabase()
 
     const connection = await connectSql.getConnection()
     console.log('Conectado a la DB')
@@ -28,22 +16,14 @@ async function main() {
         const hour = faker.date.anytime().toLocaleTimeString()
         const name = faker.person.fullName()
         const email = faker.internet.email()
-        const phone = faker.phone.number()
+        const phone = faker.phone.number({ style: 'national' })
         const comment = faker.lorem.paragraph()
         const isArchived = faker.datatype.boolean()
 
-        const contact = new ContactModel({
-            date,
-            hour,
-            name,
-            email,
-            phone,
-            comment,
-            isArchived
-        })
-        validateContact(contact)
-        
-        await contact.save() 
+        await connectSql.execute(
+            'INSERT INTO contacts (date, hour, name, email, phone, comment, isArchived) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+            [date, hour, name, email, phone, comment, isArchived]
+        )        
     }
 
     async function generateUsers() {
@@ -60,24 +40,6 @@ async function main() {
             'INSERT INTO users (photo, name, email, startDate, description, contact, status, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
             [photo, name, email, startDate, description, contact, status, password]
         )
-
-        /**
-         * const user = new UserModel({
-            photo,
-            name,
-            email,
-            startDate,
-            description,
-            contact,
-            status,
-            password
-        })
-        validateUser(user)
-
-        await user.save()
-         */
-
-        
     }
 
     async function generateBookings() {
@@ -106,25 +68,10 @@ async function main() {
             'SHOWER',
         ], { min: 3, max: 6 })
 
-        const booking = new BookingModel({
-            guestName,
-            orderDate,
-            orderDateHour,
-            checkIn,
-            checkInHour,
-            checkOut,
-            checkOutHour,
-            specialRequest,
-            type,
-            number,
-            status,
-            price,
-            description,
-            amenities
-        })
-        validateBooking(booking)
-
-        await booking.save()
+        await connectSql.execute(
+            'INSERT INTO bookings (guestName, orderDate, orderDateHour, checkIn, checkInHour, checkOut, checkOutHour, specialRequest, type, number, status, price, description, amenities) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+            [guestName, orderDate, orderDateHour, checkIn, checkInHour, checkOut, checkOutHour, specialRequest, type, number, status, price, description, amenities]
+        )
     }
 
     async function generateRooms() {
@@ -146,30 +93,20 @@ async function main() {
             'TOWEL',
             'SHOWER',
         ], { min: 3, max: 6 })
-        const price = faker.commerce.price()
-        const offerPrice = faker.commerce.price()
+        const price = faker.commerce.price({ min: 150, max: 200 })
+        const offerPrice = faker.commerce.price({ min: 100, max: 149 })
         const status = faker.helpers.arrayElement(['Available', 'Booked'])
 
-        const room = new RoomModel({
-            photo,
-            number,
-            name,
-            type,amenities,
-            price,
-            offerPrice,
-            status
-        })
-        validateRoom(room)
-
-        await room.save()
-    }
-
-    
+        await connectSql.execute(
+            'INSERT INTO rooms (photo, number, name, type, amenities, price, offerPrice, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+            [photo, number, name, type, amenities, price, offerPrice, status]
+        )
+    }    
 
     for (let i = 0; i < 10; i++) {
-        //await generateContacts()
-        //await generateBookings();
-        //await generateRooms()
+        await generateContacts()
+        await generateBookings();
+        await generateRooms()
         await generateUsers()
     }
 }
