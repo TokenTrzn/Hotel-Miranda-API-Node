@@ -6,6 +6,7 @@ import { roomRouter } from './controllers/RoomController'
 import { bookingRouter } from './controllers/BookingController'
 import { contactRouter } from './controllers/ContactController'
 import { userRouter } from './controllers/UserController'
+import serverless from 'serverless-http'
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -49,6 +50,8 @@ app.get('/live', (req: Request, res: Response) => {
     res.send(`${new Date().toISOString()}`)
 })
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})
+//app.listen(port, () => {
+//    console.log(`Server is running on port ${port}`)
+//})
+
+module.exports.handler = serverless(app);

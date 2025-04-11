@@ -1,0 +1,130 @@
+{
+  "C:\\Users\\tikot\\Desktop\\OXYGEN\\Proyectos\\API-Node\\serverless.yml": {
+    "versionFramework": "4.12.0",
+    "servicePath": "C:\\Users\\tikot\\Desktop\\OXYGEN\\Proyectos\\API-Node\\serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "miranda-backend",
+      "plugins": [
+        "serverless-dotenv-plugin"
+      ],
+      "package": {
+        "patterns": [
+          "!./**",
+          "package.json",
+          "node_modules/**",
+          "dist/**",
+          "data/**",
+          "public/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/miranda-backend/dev/code-artifacts"
+      },
+      "provider": {
+        "name": "aws",
+        "region": "eu-west-3",
+        "runtime": "nodejs22.x",
+        "profile": "miranda-api",
+        "environment": {
+          "MONGODB_URI": "mongodb+srv://albertogilsanjuan:xuejdyagas9kXeZ5@cluster0.pwmjy.mongodb.net/",
+          "SECRET_TOKEN": "<REDACTED>",
+          "MONGO_URI": "mongodb+srv://albertogilsanjuan:xuejdyagas9kXeZ5@cluster0.pwmjy.mongodb.net/",
+          "PORT": "3002",
+          "PASSWORD": "<REDACTED>",
+          "CONSOLE_URL": "https://340752808920.signin.aws.amazon.com/console",
+          "CONSOLE_PASS": "nz7nN44",
+          "SQL_PASSWORD": "<REDACTED>",
+          "SQL_DB_NAME": "hotel_miranda"
+        },
+        "stage": "dev",
+        "versionFunctions": true
+      },
+      "functions": {
+        "app": {
+          "handler": "dist/index.handler",
+          "events": [
+            {
+              "http": {
+                "path": "/",
+                "method": "ANY",
+                "cors": true
+              }
+            },
+            {
+              "http": {
+                "path": "/{proxy+}",
+                "method": "ANY",
+                "cors": true
+              }
+            }
+          ],
+          "name": "miranda-backend-dev-app"
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "region": "eu-west-3",
+      "runtime": "nodejs22.x",
+      "profile": "miranda-api",
+      "environment": {
+        "MONGODB_URI": "mongodb+srv://albertogilsanjuan:xuejdyagas9kXeZ5@cluster0.pwmjy.mongodb.net/",
+        "SECRET_TOKEN": "<REDACTED>",
+        "MONGO_URI": "mongodb+srv://albertogilsanjuan:xuejdyagas9kXeZ5@cluster0.pwmjy.mongodb.net/",
+        "PORT": "3002",
+        "PASSWORD": "<REDACTED>",
+        "CONSOLE_URL": "https://340752808920.signin.aws.amazon.com/console",
+        "CONSOLE_PASS": "nz7nN44",
+        "SQL_PASSWORD": "<REDACTED>",
+        "SQL_DB_NAME": "hotel_miranda"
+      },
+      "stage": "dev",
+      "versionFunctions": true
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "serviceRawFile": "service: miranda-backend\r\nplugins:\r\n  - serverless-dotenv-plugin\r\npackage:\r\n  patterns:\r\n    - \"!./**\"\r\n    - \"package.json\"\r\n    - \"node_modules/**\"\r\n    - \"dist/**\"\r\n    - \"data/**\"\r\n    - \"public/**\"\r\nprovider:\r\n  name: aws\r\n  region: eu-west-3\r\n  runtime: nodejs22.x\r\n  profile: miranda-api\r\n  environment:\r\n    MONGODB_URI: ${env:MONGO_URI}\r\nfunctions:\r\n  app:\r\n    handler: dist/index.handler\r\n    events:\r\n      - http:\r\n          path: /\r\n          method: ANY\r\n          cors: true\r\n      - http:\r\n          path: /{proxy+}\r\n          method: ANY\r\n          cors: true",
+    "command": [
+      "logs"
+    ],
+    "options": {
+      "function": "app",
+      "stage": "dev"
+    },
+    "orgId": "c6706a69-6f60-4ff5-ad8b-e9815a92bd46",
+    "orgName": "tokentrzn",
+    "userId": "GRZD6lZpRKCCrZmglC",
+    "userName": "tokentrzn",
+    "serviceProviderAwsAccountId": "340752808920",
+    "serviceProviderAwsCfStackName": "miranda-backend-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-west-3:340752808920:stack/miranda-backend-dev/fd9df430-16be-11f0-b4ac-0633fa607c7f",
+    "serviceProviderAwsCfStackCreated": "2025-04-11T10:23:20.654Z",
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": "CREATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "AppLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-west-3:340752808920:function:miranda-backend-dev-app:1",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-miranda-backend-dev-AppLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://ss9qwevpvf.execute-api.eu-west-3.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-miranda-backend-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-eu-west-3-f13440a3-1d18",
+        "ExportName": "sls-miranda-backend-dev-ServerlessDeploymentBucketName"
+      }
+    ]
+  }
+}
