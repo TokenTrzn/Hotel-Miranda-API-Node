@@ -54,8 +54,8 @@ const roomService = new RoomService()
  *                      example: "Booked"
  */
 
-roomRouter.get('/api/v1/rooms', (req: Request, res: Response) => {
-    const roomList = roomService.fetchAll()
+roomRouter.get('/api/v1/rooms', async (req: Request, res: Response) => {
+    const roomList = await roomService.fetchAll()
     res.json(roomList)
 })
 
@@ -104,8 +104,8 @@ roomRouter.get('/api/v1/rooms', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.get('/api/v1/rooms/:id', (req: Request, res: Response) => {
-    const room = roomService.fetchById(req.params.id)
+roomRouter.get('/api/v1/rooms/:id', async (req: Request, res: Response) => {
+    const room = await roomService.fetchById(req.params.id)
     if (room !== null) {
         res.json(room)
     } else {
@@ -158,8 +158,8 @@ roomRouter.get('/api/v1/rooms/:id', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.post('/api/v1/rooms', (req: Request, res: Response) => {
-    const newRoom = roomService.create(req.body)
+roomRouter.post('/api/v1/rooms', async (req: Request, res: Response) => {
+    const newRoom = await roomService.create(req.body)
     res.status(201).json(newRoom)
 })
 
@@ -208,8 +208,8 @@ roomRouter.post('/api/v1/rooms', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.put('/api/v1/rooms/:id', (req: Request, res: Response) => {
-    const updatedRoom = roomService.update(req.params.id, req.body)
+roomRouter.put('/api/v1/rooms/:id', async (req: Request, res: Response) => {
+    const updatedRoom = await roomService.update(req.params.id, req.body)
     if (updatedRoom !== null) {
         res.status(204).json(updatedRoom)
     } else {
@@ -262,8 +262,8 @@ roomRouter.put('/api/v1/rooms/:id', (req: Request, res: Response) => {
  *                      example: "Booked"
  */
 
-roomRouter.delete('/api/v1/rooms/:id', (req: Request, res: Response) => {
-    const deletedRoom = roomService.delete(req.params.id)
+roomRouter.delete('/api/v1/rooms/:id', async (req: Request, res: Response) => {
+    const deletedRoom = await roomService.delete(req.params.id)
     if (deletedRoom !== null) {
         res.status(204).json({ message: 'Room deleted' })
     } else {

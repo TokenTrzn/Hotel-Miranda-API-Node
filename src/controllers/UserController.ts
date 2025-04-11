@@ -55,8 +55,8 @@ const userService = new UserService()
  *                      example: "password"
  */
 
-userRouter.get('/api/v1/users', (req: Request, res: Response) => {
-    const userList = userService.fetchAll()
+userRouter.get('/api/v1/users', async (req: Request, res: Response) => {
+    const userList = await userService.fetchAll()
     res.json(userList)
 })
 
@@ -105,8 +105,8 @@ userRouter.get('/api/v1/users', (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.get('/api/v1/users/:id', (req: Request, res: Response) => {
-    const user = userService.fetchById(req.params.id)
+userRouter.get('/api/v1/users/:id', async (req: Request, res: Response) => {
+    const user = await userService.fetchById(req.params.id)
     if (user !== null) {
         res.json(user)
     } else {
@@ -159,8 +159,8 @@ userRouter.get('/api/v1/users/:id', (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.post('/api/v1/users', (req: Request, res: Response) => {
-    const newUser = userService.create(req.body)
+userRouter.post('/api/v1/users', async (req: Request, res: Response) => {
+    const newUser = await userService.create(req.body)
     res.status(201).json(newUser)
 })
 
@@ -209,8 +209,8 @@ userRouter.post('/api/v1/users', (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.put('/api/v1/users/:id', (req: Request, res: Response) => {
-    const updatedUser = userService.update(req.params.id, req.body)
+userRouter.put('/api/v1/users/:id', async (req: Request, res: Response) => {
+    const updatedUser = await userService.update(req.params.id, req.body)
     if (updatedUser !== null) {
         res.status(204).json(updatedUser)
     } else {
@@ -263,8 +263,8 @@ userRouter.put('/api/v1/users/:id', (req: Request, res: Response) => {
  *                      example: "password"
  */
 
-userRouter.delete('/api/v1/users/:id', (req: Request, res: Response) => {
-    const deletedUser = userService.delete(req.params.id)
+userRouter.delete('/api/v1/users/:id', async (req: Request, res: Response) => {
+    const deletedUser = await userService.delete(req.params.id)
     if (deletedUser !== null) {
         res.status(204).json({ message: 'User deleted' })
     } else {

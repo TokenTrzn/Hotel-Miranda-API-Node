@@ -75,8 +75,8 @@ const roomService = new RoomService()
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get('/api/v1/bookings', (req: Request, res: Response) => {
-    const bookingList = bookingService.fetchAll()
+bookingRouter.get('/api/v1/bookings', async (req: Request, res: Response) => {
+    const bookingList = await bookingService.fetchAll()
     res.json(bookingList)
 })
 
@@ -143,8 +143,8 @@ bookingRouter.get('/api/v1/bookings', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.get('/api/v1/bookings/:id', (req: Request, res: Response) => {
-    const booking = bookingService.fetchById(req.params.id)
+bookingRouter.get('/api/v1/bookings/:id', async (req: Request, res: Response) => {
+    const booking = await bookingService.fetchById(req.params.id)
     if (booking !== null) {
         res.json(booking)
     } else {
@@ -215,8 +215,8 @@ bookingRouter.get('/api/v1/bookings/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.post('/api/v1/bookings', (req: Request, res: Response) => {
-    const newBooking = bookingService.create(req.body)
+bookingRouter.post('/api/v1/bookings', async (req: Request, res: Response) => {
+    const newBooking = await bookingService.create(req.body)
     res.status(201).json(newBooking)
 })
 
@@ -283,8 +283,8 @@ bookingRouter.post('/api/v1/bookings', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.put('/api/v1/bookings/:id', (req: Request, res: Response) => {
-    const updatedBooking = bookingService.update(req.params.id, req.body)
+bookingRouter.put('/api/v1/bookings/:id', async (req: Request, res: Response) => {
+    const updatedBooking = await bookingService.update(req.params.id, req.body)
     if (updatedBooking !== null) {
         res.status(204).json(updatedBooking)
     } else {
@@ -355,8 +355,8 @@ bookingRouter.put('/api/v1/bookings/:id', (req: Request, res: Response) => {
  *                      example: ['Wifi', 'Mini Bar']
  */
 
-bookingRouter.delete('/api/v1/bookings/:id', (req: Request, res: Response) => {
-    const deletedBooking = bookingService.delete(req.params.id)
+bookingRouter.delete('/api/v1/bookings/:id', async (req: Request, res: Response) => {
+    const deletedBooking = await bookingService.delete(req.params.id)
     if (deletedBooking !== null) {
         res.status(204).json({ message: 'Booking deleted' })
     } else {

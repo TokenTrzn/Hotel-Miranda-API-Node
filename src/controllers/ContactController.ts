@@ -52,8 +52,8 @@ const contactService = new ContactService()
  *                      example: true              
  */
 
-contactRouter.get('/api/v1/contacts', (req: Request, res: Response) => {
-    const contactList = contactService.fetchAll()
+contactRouter.get('/api/v1/contacts', async (req: Request, res: Response) => {
+    const contactList = await contactService.fetchAll()
     res.json(contactList)
 })
 
@@ -99,8 +99,8 @@ contactRouter.get('/api/v1/contacts', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.get('/api/v1/contacts/:id', (req: Request, res: Response) => {
-    const contact = contactService.fetchById(req.params.id)
+contactRouter.get('/api/v1/contacts/:id', async (req: Request, res: Response) => {
+    const contact = await contactService.fetchById(req.params.id)
     if (contact !== null) {
         res.json(contact)
     } else {
@@ -150,8 +150,8 @@ contactRouter.get('/api/v1/contacts/:id', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.post('/api/v1/contacts', (req: Request, res: Response) => {
-    const newContact = contactService.create(req.body)
+contactRouter.post('/api/v1/contacts', async (req: Request, res: Response) => {
+    const newContact = await contactService.create(req.body)
     res.status(201).json(newContact)
 })
 
@@ -197,8 +197,8 @@ contactRouter.post('/api/v1/contacts', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.put('/api/v1/contacts/:id', (req: Request, res: Response) => {
-    const updateContact = contactService.update(req.params.id, req.body)
+contactRouter.put('/api/v1/contacts/:id', async (req: Request, res: Response) => {
+    const updateContact = await contactService.update(req.params.id, req.body)
     if (updateContact !== null) {
         res.status(204).json(updateContact)
     } else {
@@ -248,8 +248,8 @@ contactRouter.put('/api/v1/contacts/:id', (req: Request, res: Response) => {
  *                      example: true              
  */
 
-contactRouter.delete('/api/v1/contacts/:id', (req: Request, res: Response) => {
-    const deletedContact = contactService.delete(req.params.id)
+contactRouter.delete('/api/v1/contacts/:id', async (req: Request, res: Response) => {
+    const deletedContact = await contactService.delete(req.params.id)
     if (deletedContact !== null) {
         res.status(204).json({ message: 'Contact deleted' })
     } else {
