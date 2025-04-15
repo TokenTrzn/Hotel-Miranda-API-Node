@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express"
 import users from '../data/usersData.json'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { UserInterface } from '../interfaces/UserInterface'
 

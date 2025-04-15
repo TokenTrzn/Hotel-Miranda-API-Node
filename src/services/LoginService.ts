@@ -1,5 +1,5 @@
 import { AuthInterface } from "../interfaces/AuthInterface";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import authData from '../data/authData.json'
 
